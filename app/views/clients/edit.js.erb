@@ -1,0 +1,48 @@
+$("#modal-client").html("<%= j (render 'modal_edit_client') %>")
+$("#modal-client").modal('show')
+
+var form_edit_client = $('#form-new-client')
+
+form_edit_client.validate({
+	rules: {
+		'client[name]': {
+			required: true,
+			// Using the normalizer to trim the value of the element
+			// before validating it.
+			//
+			// The value of `this` inside the `normalizer` is the corresponding
+			// DOMElement. In this example, `this` references the `username` element.
+			normalizer: function(value) {
+				return $.trim(value);
+			}
+		},
+		'client[location]': {
+			required: true
+		},
+		'client[type_client]': {
+			required: true
+		}
+	}
+})
+
+$("#form-new-client").on("ajax:success", function(event) {
+    clients_table.ajax.reload(null,false)
+    new Noty({
+        theme: 'bootstrap-v4',
+        type: 'success ',
+        layout: 'topRight',
+        text: " Edicion exitosa ",
+        timeout: ( true, 1000 )
+  }).show()
+    $("#modal-client").modal('hide')
+  }).on("ajax:error", function(event) {
+  // $('#form-new-client #error_list').empty().delay( 8000 )
+  $('#form-new-client #error_explanation').hide(500)
+  $('#form-new-client #error_list').empty()
+	var msj = jQuery.parseJSON( event.detail[2].response )
+	console.log(msj)
+	$.each( msj, function( key, value ) {
+	  $('#form-new-client #error_list').append('<li> ' + key + ": " + value + ' </li>')
+	})
+	$('#form-new-client #error_explanation').show('slow')
+})

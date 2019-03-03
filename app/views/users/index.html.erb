@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <div class="row">
+    <h2>Usuarios registrados</h2>
+  </div>
+  <%= link_to 'Nuevo usuario', signup_path, {:remote => true, 'data-toggle' =>  "modal",
+                                                 'data-target' => '#modal-user', 'class' => 'btn btn-primary'} %>
+</div>
+ <br>
+<table id="users_table" class="table table-hover">
+  <thead class="">
+    <tr>
+      <th>Nombre de usuario</th>
+      <th>Email</th>
+      <th>Cliente</th>
+      <th>Persona</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- ajax -->
+  </tbody>
+</table>
+
+<br>
+
+<!-- Modal para alta y edicion de usuario -->
+<div class="modal fade" id="modal-user" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+</div>
+<!-- End modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_delete_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¿ Esta seguro ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <input id="user_id" type="hidden">
+
+      <div class="modal-footer">
+        <button type="button" class="btn u-btn-red" onclick=delete_user()>Eliminar</button>
+        <button type="button" class="btn u-btn-indigo" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

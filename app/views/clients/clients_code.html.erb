@@ -1,0 +1,38 @@
+
+json.actions "<a data-toggle='modal' data-target='#modal-person' class='btn btn-info' data-remote='true'
+                   href='/clients/#{p.client_id}/persons/#{p.id}'>Show</a>
+                <a id='btn_person_edit' data-toggle='modal' data-target='#modal-person' class='btn btn-warning'
+                   data-remote='true' href='/clients/#{p.client_id}/persons/#{p.id}/edit'>Edit</a>
+                <button id='btn-delete' name='btn-delete' type='button' class='btn btn-danger' data-toggle='modal' data-target='#modal-delete' data-params='id=#{p.id}'> D </button>"
+
+
+
+        <td>
+          <div class="btn-group" role="group">
+            <button id="btn-employee" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btn-employee" >
+                <%= link_to 'Ver', client_persons_path(client), class: 'dropdown-item' %>
+                <%= link_to 'Nuevo', new_client_person_path(client), class: 'dropdown-item' %>
+            </div>
+          </div>
+
+          <div class="btn-group" role="group">
+            <button id="btn-computers" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-desktop" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btn-employee" >
+              <%= link_to 'Ver', client_fleets_path(client), class: 'dropdown-item' %>
+                <%= link_to 'Nuevo', new_client_fleet_path(client), class: 'dropdown-item' %>
+            </div>
+          </div>
+          <%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe,
+              client_path(client), class:'btn btn-info'%>
+          <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe,
+              edit_client_path(client), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-client', 'class' => 'btn btn-info'} %>
+          <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe,
+                 client_path(client),
+                 method: :delete,
+                 data: { confirm: 'Está seguro ?' }, class: 'btn btn-danger' %>
+        </td>

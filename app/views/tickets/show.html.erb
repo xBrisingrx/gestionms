@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <button type="button" class="btn btn-primary btn-block show_answer g-mb-10">
+    <i class="fas fa-pencil-alt"></i> Responder
+  </button>
+
+  <div class="row justify-content-center col-10" id="answer" style="display:none">
+    <%= form_with(model: [ @ticket_create, @ticket_create.answers.build ], local: true, :html => {:id => 'person-form', :class => 'g-brd-around g-brd-gray-light-v4 g-mb-20 w-100'} ) do |form| %>
+      <div class="form-group">
+        <%= form.label :detail, 'Mensaje ', class: 'col-sm-2 col-form-label g-mb-5 w-100'  %><br>
+        <div class="col-sm-9">
+          <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0'%>
+        </div>
+      </div>
+      <%= form.submit 'Enviar', class: 'btn btn-primary g-mb-5 ml-3' %>
+      <button type="button" class="btn btn-danger show_answer g-mb-5 mr-5">Cancelar</button>
+    <%end%>
+  </div>
+
+  <!-- Respuestas a este ticket -->
+  <% if @answers %>
+    <% @answers.each do |answer| %>
+      <div class="card g-brd-cyan rounded-0 g-mb-10 w-100">
+        <h3 class="card-header h5 text-white g-bg-cyan g-brd-transparent rounded-0">
+          <i class="fa fa-user g-font-size-default g-mr-5"></i>
+          <small><%= answer.user.person.name %> <%= answer.user.person.surname %></small>
+        </h3>
+
+        <div class="card-block">
+          <p class="card-text"><%= answer.detail %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <!-- Fin respuestas al ticket -->
+
+
+  <!-- Ticket -->
+  <div class="card g-brd-cyan rounded-0">
+    <h3 class="card-header h5 text-white g-bg-cyan g-brd-transparent rounded-0">
+      <i class="fa fa-user g-font-size-default g-mr-5"></i>
+      <small> <%= @ticket.user.person.name %> <%= @ticket.user.person.surname %> </small>
+    </h3>
+
+    <div class="card-block">
+      <h4 class="h5"> <%= @ticket.title %> </h4>
+      <p class="card-text"><%= @ticket.detail %></p>
+    </div>
+  </div>
+
+  <%= link_to '<i class="fa fa-reply"> Volver </i>'.html_safe, tickets_path, class: 'btn u-btn-indigo g-mt-10' %>
+</div>

@@ -1,0 +1,103 @@
+<%= form_with( model: @client, class: 'g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30', id: 'form-new-client', data: { type: "json" } ) do |form| %>
+
+  <div id="error_explanation" class="alert alert-danger" style="display:none">
+    <ul id="error_list"></ul>
+  </div>
+    
+  <div class="form-group row">
+    <label for="client_type_client_id" class="col-sm-3 col-form-label">Tipo cliente</label>
+    <div class="col-sm-6">
+      <select class="form-control" id="client_client_type_id" name="client[client_type_id]" class="form-control">
+        <option disabled selected>Seleccione tipo de cliente</option>
+        <% @client_types.each do |t|  %>
+          <% if @client.client_type_id == t.id %>
+            <option value="<%= t.id %>" selected ><%= t.name %></option>
+            <% else %>
+            <option value="<%= t.id %>"><%= t.name %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label 'Razón social', class: 'col-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :name, class: 'form-control rounded-0' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'CUIT', class: 'col-sm-3 col-form-label' %>
+    <%= form.number_field :cuit %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'Email', class: 'col-sm-3 col-form-label' %>
+    <%= form.email_field :email  %>
+  </div>
+
+  <div class="form-group row">
+    <label for="client_iva_condition_id" class="col-sm-3 col-form-label">Condición de IVA</label>
+    <div class="col-sm-6">
+      <select class="form-control" id="client_iva_condition_id" name="client[iva_condition_id]" class="form-control">
+        <option disabled selected value="">Seleccione condición</option>
+        <% @iva_conditions.each do |iva|  %>
+          <% if @client.iva_condition_id == iva.id %>
+            <option value="<%= iva.id %>" selected ><%= iva.condition %></option>
+            <% else %>
+            <option value="<%= iva.id %>"><%= iva.condition %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="client_sale_condition_id" class="col-sm-3 col-form-label">Condición de venta</label>
+    <div class="col-sm-6">
+      <select class="form-control" id="client_sale_condition_id" name="client[sale_condition_id]" class="form-control">
+        <option disabled selected value="">Seleccione condición</option>
+        <% @sale_conditions.each do |sale|  %>
+          <% if @client.sale_condition_id == sale.id %>
+            <option value="<%= sale.id %>" selected ><%= sale.condition %></option>
+            <% else %>
+            <option value="<%= sale.id %>"><%= sale.condition %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label 'Dirección', class: 'col-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :direction, class: 'form-control rounded-0' %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= form.label 'Localidad', class: 'col-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :location, class: 'form-control rounded-0' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label 'Provincia', class: 'col-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :province, class: 'form-control rounded-0' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label 'Teléfono', class: 'col-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :phone, class: 'form-control rounded-0' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Agregar', class: 'btn btn-primary' %>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+  </div>
+<% end %>

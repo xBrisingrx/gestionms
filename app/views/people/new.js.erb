@@ -1,0 +1,44 @@
+$("#modal-person").html("<%= j (render 'form') %>")
+$("#modal-person").modal('show')
+
+var form_new_person = $('#form-new-person')
+
+form_new_person.validate({
+	rules: {
+		'person[person_type_id]': {
+			required: true,
+			// Using the normalizer to trim the value of the element
+			// before validating it.
+			//
+			// The value of `this` inside the `normalizer` is the corresponding
+			// DOMElement. In this example, `this` references the `username` element.
+			normalizer: function(value) {
+				return $.trim(value);
+			}
+		},
+
+		'person[type_client]': {
+			required: true
+		}
+	}
+})
+
+$("#form-new-person").on("ajax:success", function(event) {
+  people_table.ajax.reload(null,false)
+  new Noty({
+      theme: 'bootstrap-v4',
+      type: 'success ',
+      layout: 'topRight',
+      text: " Alta exitosa ",
+      timeout: ( true, 1000 )
+  }).show()
+  $("#modal-person").modal('hide')
+	}).on("ajax:error", function(event) {
+	  $('#form-new-person #error_explanation').hide(500)
+	  $('#form-new-person #error_list').empty()
+		var msj = jQuery.parseJSON( event.detail[2].response )
+		$.each( msj, function( key, value ) {
+		  $('#form-new-person #error_list').append('<li> ' + key + ": " + value + ' </li>')
+		})
+		$('#form-new-person #error_explanation').show('slow')
+})

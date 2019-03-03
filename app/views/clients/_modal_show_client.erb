@@ -1,0 +1,63 @@
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nuevo cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>
+            <strong>Fantasy name:</strong>
+            <%= @client.name %>
+          </p>
+
+          <p>
+            <strong>Cuit:</strong>
+            <%= @client.cuit %>
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+            <%= @client.email %>
+          </p>
+
+          <p>
+            <strong>Iva condition:</strong>
+            <%= @client.iva_condition %>
+          </p>
+
+          <p>
+            <strong>Sale condition:</strong>
+            <%= @client.sale_condition %>
+          </p>
+
+          <p>
+            <strong>Direction:</strong>
+            <%= @client.direction %>
+          </p>
+
+          <p>
+            <strong>Location:</strong>
+            <%= @client.location %>
+          </p>
+
+          <p>
+            <strong>Province:</strong>
+            <%= @client.province %>
+          </p>
+
+          <p>
+            <strong>Phone:</strong>
+            <%= @client.phone %>
+          </p>
+
+          <p>
+            <strong>Active:</strong>
+            <%= @client.active %>
+          </p>
+
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>

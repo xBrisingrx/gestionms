@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fantasy name:</strong>
+  <%= @client.fantasy_name %>
+</p>
+
+<p>
+  <strong>Cuit:</strong>
+  <%= @client.cuit %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @client.email %>
+</p>
+
+<p>
+  <strong>Iva condition:</strong>
+  <%= @client.iva_condition %>
+</p>
+
+<p>
+  <strong>Sale condition:</strong>
+  <%= @client.sale_condition %>
+</p>
+
+<p>
+  <strong>Direction:</strong>
+  <%= @client.direction %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @client.location %>
+</p>
+
+<p>
+  <strong>Province:</strong>
+  <%= @client.province %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @client.phone %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @client.active %>
+</p>
+
+<%= link_to 'Edit', edit_client_path(@client) %> |
+<%= link_to 'Back', clients_path %>

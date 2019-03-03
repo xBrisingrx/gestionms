@@ -1,0 +1,90 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Editar cliente</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <%= form_with(model: [@client, @person], remote: true, :html => { :id => 'form-person' } ) do |form| %>
+        <% if @person.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+            <ul>
+            <% @person.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group row">
+          <label for="person_person_type_id" class="col-sm-3 col-form-label">Tipo persona</label>
+          <div class="col-sm-6">
+            <select class="form-control" id="person_person_type_id" name="person[person_type_id]" class="form-control">
+              <option disabled selected value="">Seleccione tipo de cliente</option>
+              <% @person_types.each do |t|  %>
+                <% if !@person.nil? && @person.person_type_id == t.id %>
+                  <option value="<%= t.id %>" selected ><%= t.name %></option>
+                  <% else %>
+                  <option value="<%= t.id %>"><%= t.name %></option>
+                <% end %>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :name, class: 'col-sm-3 col-form-label' %>
+          <%= form.text_field :name %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :surname, class: 'col-sm-3 col-form-label' %>
+          <%= form.text_field :surname %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :dni, class: 'col-sm-3 col-form-label' %>
+          <%= form.number_field :dni %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :email, class: 'col-sm-3 col-form-label' %>
+          <%= form.text_field :email %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :phone, class: 'col-sm-3 col-form-label' %>
+          <%= form.number_field :phone %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit 'Agregar', class: 'btn btn-primary' %>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  // $("#form-person").on("ajax:success", function(event) {
+  // persons_table.ajax.reload(null,false)
+
+  // new Noty({
+  //     theme: 'bootstrap-v4',
+  //     type: 'success ',
+  //     layout: 'topRight',
+  //     text: " ajax success ",
+  //     timeout: ( true, 1000 )
+  // }).show()
+  // }).on("ajax:error", function(event) {
+  //   return $("#form-person").append("<p>ERROR</p>");
+  // })
+
+})
+</script>

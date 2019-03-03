@@ -1,0 +1,58 @@
+<div class="g-pa-15">
+  <div class="row">
+    <h2>Clientes registrados en el sistema</h2>
+  </div>
+  <%= link_to 'Nuevo cliente', new_client_path, {:remote => true, 'data-toggle' =>  "modal",
+                                                 'data-target' => '#modal-client', 'class' => 'btn btn-primary'} %>
+  <%= link_to 'Download as Excel', clients_path(format: :xlsx), :class => 'btn btn-info' %>
+</div>
+ <br>
+<table id="clients_table" class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nombre/Razón social</th>
+      <th>CUIT</th>
+      <th>Email</th>
+      <th>Dirección</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  </tbody>
+</table>
+
+<br>
+
+
+<div class="modal fade" id="modal-client" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> </div>
+
+
+<!-- Modal para eliminar cliente -->
+<div class="modal fade" id="modal_delete_client" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¿ Esta seguro de eliminar este cliente ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="disabled_client" method="POST" data-remote="true" id="form_disable_client">
+          <input type="hidden" id="client_id" name="client[id]" value="">
+          <button type="submit" class="btn btn-md u-btn-red g-mr-10">Eliminar</button>
+          <button type="button" data-dismiss="modal" class="btn btn-md u-btn-indigo g-mr-10"> Cerrar </button>
+        </form>
+        <p id="name_product_delete"><strong>Nombre: </strong> </p>
+        <br>
+        <p id="description_product_delete"><strong>Detalle: </strong></p>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin modal eliminar cliente -->

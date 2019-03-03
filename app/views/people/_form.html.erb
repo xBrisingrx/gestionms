@@ -1,0 +1,61 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Alta de persona</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <%= form_with(model: [ @client, @client.people.build ], :id => 'form-new-person', class: 'g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30', data: { type: "json" } ) do |form| %>
+      <div id="error_explanation" class="alert alert-danger" style="display:none">
+        <ul id="error_list"></ul>
+      </div>
+
+          <div class="form-group row">
+          <label for="client_type_client_id" class="col-sm-3 col-form-label">Tipo persona</label>
+          <div class="col-sm-6">
+            <select class="form-control" id="person_person_type_id" name="person[person_type_id]" class="form-control">
+              <option disabled selected>Seleccione tipo de persona</option>
+              <% @person_types.each do |t|  %>
+                <option value="<%= t.id %>"><%= t.name %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= form.label :name,'Nombre', class: 'col-sm-3 col-form-label' %>
+          <div class="col-9">
+            <%= form.text_field :name, class: 'form-control rounded-0' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :surname,'Apellido', class: 'col-sm-3 col-form-label' %>
+          <%= form.text_field :surname %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :dni,'DNI', class: 'col-sm-3 col-form-label' %>
+          <%= form.number_field :dni %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :email,'Email', class: 'col-sm-3 col-form-label' %>
+          <%= form.text_field :email %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :phone,'Telefono', class: 'col-sm-3 col-form-label' %>
+          <%= form.number_field :phone %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit 'Agregar', class: 'btn btn-primary' %>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

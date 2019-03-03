@@ -1,0 +1,92 @@
+<%= form_with(model: @client, remote: true, :html => {:id => 'client-form'}) do |form| %>
+  <% if @client.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@client.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <ul>
+      <% client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+      <label for="client_type_client" class="col-sm-3 col-form-label">Tipo cliente</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="client_type_client" name="client[type_client]" class="form-control">
+          <option disabled="" selected>Seleccione cliente</option>
+          <% if (@client.type_client == 'Empresa') %>
+            <option value="Empresa" selected>Empresa</option>
+          <% else %>
+            <option value="Empresa">Empresa</option>
+         <% end %>
+        <% if (@client.type_client == 'Particular') %>
+            <option value="Particular" selected="">Particular</option>
+          <% else %>
+            <option value="Particular">Particular</option>
+         <% end %>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label 'Razón social', class: 'col-sm-3 col-form-label' %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'CUIT', class: 'col-sm-3 col-form-label' %>
+    <%= form.number_field :cuit %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'Email', class: 'col-sm-3 col-form-label' %>
+    <%= form.email_field :email  %>
+  </div>
+
+  <div class="form-group row">
+      <label for="client_iva_condition" class="col-sm-3 col-form-label">Condición de IVA</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="client_iva_condition" name="client[iva_condition]" class="form-control">
+          <option disabled="" selected="">Seleccione condición</option>
+          <option value="" disabled="">Consultar</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group row">
+      <label for="client_sale_condition" class="col-sm-3 col-form-label">Condición de venta</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="client_sale_condition" name="client[sale_condition]" class="form-control">
+          <option disabled="" selected="">Seleccione condición</option>
+          <option value="" disabled="">Consultar</option>
+        </select>
+      </div>
+  </div>
+
+ <div class="form-group">
+    <%= form.label 'Dirección', class: 'col-sm-3 col-form-label' %>
+    <%= form.text_field :direction %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'Localidad', class: 'col-sm-3 col-form-label' %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'Provincia', class: 'col-sm-3 col-form-label' %>
+    <%= form.text_field :province %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label 'Teléfono', class: 'col-sm-3 col-form-label' %>
+    <%= form.number_field :phone %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Agregar', class: 'btn btn-primary' %>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+  </div>
+<% end %>
+

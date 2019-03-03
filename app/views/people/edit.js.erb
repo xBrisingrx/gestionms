@@ -1,0 +1,18 @@
+$("#modal-person").html("<%= j (render 'form_edit') %>")
+
+$("#modal-person").modal('show')
+
+$("#form-person").on("ajax:success", function(event) {
+  new Noty({
+      theme: 'bootstrap-v4',
+      type: 'success ',
+      layout: 'topRight',
+      text: " Edición exitosa ",
+      timeout: ( true, 1000 )
+  }).show()
+
+
+}).on("ajax:error", function(event) {
+
+  return $("#form-person").append("<p>ERROR</p>");
+})
