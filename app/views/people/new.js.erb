@@ -3,6 +3,8 @@ $("#modal-person").modal('show')
 
 var form_new_person = $('#form-new-person')
 
+$('#person_person_type_id').select2({ width: '90%',theme: "bootstrap4" })
+
 form_new_person.validate({
 	rules: {
 		'person[person_type_id]': {
@@ -16,22 +18,25 @@ form_new_person.validate({
 				return $.trim(value);
 			}
 		},
-
+		'person[name]': {
+			required: true
+		},
 		'person[type_client]': {
 			required: true
+		},
+		'person[dni]': {
+			number: true
+		},
+		'person[phone]': {
+			number: true
 		}
+
 	}
 })
 
 $("#form-new-person").on("ajax:success", function(event) {
   people_table.ajax.reload(null,false)
-  new Noty({
-      theme: 'bootstrap-v4',
-      type: 'success ',
-      layout: 'topRight',
-      text: " Alta exitosa ",
-      timeout: ( true, 1000 )
-  }).show()
+  noty_alert('success', 'Alta exitosa')
   $("#modal-person").modal('hide')
 	}).on("ajax:error", function(event) {
 	  $('#form-new-person #error_explanation').hide(500)

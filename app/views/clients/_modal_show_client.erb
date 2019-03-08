@@ -1,16 +1,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Nuevo cliente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title"> <%= @client.name %> </h5>
       </div>
       <div class="modal-body">
-          <p>
-            <strong>Fantasy name:</strong>
-            <%= @client.name %>
-          </p>
 
           <p>
             <strong>Cuit:</strong>
@@ -23,38 +16,34 @@
           </p>
 
           <p>
-            <strong>Iva condition:</strong>
-            <%= @client.iva_condition %>
+            <strong>Condición de IVA:</strong>
+            <%= @client.iva_condition.condition %>
           </p>
 
           <p>
-            <strong>Sale condition:</strong>
-            <%= @client.sale_condition %>
+            <strong>Condición de venta:</strong>
+            
           </p>
 
           <p>
-            <strong>Direction:</strong>
-            <%= @client.direction %>
+            <strong>Dirección:</strong>
+
+           " #{@client.direction} " 
           </p>
 
           <p>
-            <strong>Location:</strong>
+            <strong>Localidad:</strong>
             <%= @client.location %>
           </p>
 
           <p>
-            <strong>Province:</strong>
+            <strong>Provincia:</strong>
             <%= @client.province %>
           </p>
 
           <p>
-            <strong>Phone:</strong>
+            <strong>Teléfono:</strong>
             <%= @client.phone %>
-          </p>
-
-          <p>
-            <strong>Active:</strong>
-            <%= @client.active %>
           </p>
 
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>

@@ -1,7 +1,11 @@
 $("#modal-client").html("<%= j (render 'modal_edit_client') %>")
 $("#modal-client").modal('show')
 
-var form_edit_client = $('#form-new-client')
+var form_edit_client = $('#form-client')
+$('#client_client_type_id').select2({ width: '90%',theme: "bootstrap4" })
+$('#client_iva_condition_id').select2({ width: '90%',theme: "bootstrap4" })
+$('#client_sale_condition_id').select2({ width: '90%',theme: "bootstrap4" })
+
 
 form_edit_client.validate({
 	rules: {
@@ -21,28 +25,25 @@ form_edit_client.validate({
 		},
 		'client[type_client]': {
 			required: true
+		},
+		'client[cuit]': {
+			number: true
 		}
 	}
 })
 
-$("#form-new-client").on("ajax:success", function(event) {
+$("#form-client").on("ajax:success", function(event) {
     clients_table.ajax.reload(null,false)
-    new Noty({
-        theme: 'bootstrap-v4',
-        type: 'success ',
-        layout: 'topRight',
-        text: " Edicion exitosa ",
-        timeout: ( true, 1000 )
-  }).show()
+    noty_alert('success', 'Datos actualizados')
     $("#modal-client").modal('hide')
   }).on("ajax:error", function(event) {
-  // $('#form-new-client #error_list').empty().delay( 8000 )
-  $('#form-new-client #error_explanation').hide(500)
-  $('#form-new-client #error_list').empty()
+  // $('#form-client #error_list').empty().delay( 8000 )
+  $('#form-client #error_explanation').hide(500)
+  $('#form-client #error_list').empty()
 	var msj = jQuery.parseJSON( event.detail[2].response )
 	console.log(msj)
 	$.each( msj, function( key, value ) {
-	  $('#form-new-client #error_list').append('<li> ' + key + ": " + value + ' </li>')
+	  $('#form-client #error_list').append('<li> ' + key + ": " + value + ' </li>')
 	})
-	$('#form-new-client #error_explanation').show('slow')
+	$('#form-client #error_explanation').show('slow')
 })

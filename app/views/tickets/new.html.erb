@@ -1,5 +1,69 @@
-<h1>New ticket</h1>
+<div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <i class="ti-headphone-alt bg-c-blue"></i>
+        <div class="d-inline">
+          <h5>Tickets registrados</h5>
+        <span>Descripcion de la vista</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="page-header-breadcrumb">
+        <ul class=" breadcrumb breadcrumb-title">
+          <li class="breadcrumb-item">
+            <%= link_to '<i class="ti-home"></i>'.html_safe, root_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Tickets', tickets_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="" >Nuevo ticket</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render 'form', ticket: @ticket %>
+<div class="pcoded-inner-content">
+  <div class="main-body">
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-block">
+            <ul class="nav nav-tabs md-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Varios</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">Soporte técnico</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Pedido de mail</a>
+                <div class="slide"></div>
+              </li>
+            </ul>
 
-<%= link_to 'Back', tickets_path %>
+            <div class="tab-content card-block">
+              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
+                <%= render('form_varios', ticket: @ticket)%>
+              </div>
+              <div class="tab-pane" id="proceso" role="tabpanel">
+                <%= render('form', ticket: @ticket)%>
+              </div>
+              <div class="tab-pane" id="finalizados" role="tabpanel">
+                <%= render('form', ticket: @ticket)%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

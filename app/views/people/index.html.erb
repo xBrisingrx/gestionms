@@ -1,29 +1,63 @@
-<div>
-  <div class="row">
-    <h2>Personal de <%= @client.name %> registrado en el sistema</h2>
+<div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <i class="ti-user bg-c-blue"></i>
+        <div class="d-inline">
+          <h5>Personal de <%= @client.name %></h5>
+        <span>Descripcion de la vista</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="page-header-breadcrumb">
+        <ul class=" breadcrumb breadcrumb-title">
+          <li class="breadcrumb-item">
+            <%= link_to '<i class="ti-home"></i>'.html_safe, root_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Clientes', clients_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Personal', client_people_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <%= link_to 'Nueva persona', new_client_person_path, {:remote => true, 'data-toggle' =>  "modal",
-                                                 'data-target' => '#modal-person', 'class' => 'btn btn-primary'} %>
 </div>
- <br>
-<table id="people_table" class="table table-hover">
-  <thead class="">
-    <tr>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>DNI</th>
-      <th>Email</th>
-      <th>Teléfono</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <!-- ajax -->
-  </tbody>
-</table>
-
-<br>
+<div class="pcoded-inner-content">
+  <div class="main-body">
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="card">
+          <div class="card-header">
+            <%= link_to 'Nueva persona', new_client_person_path, {:remote => true, 'data-toggle' =>  "modal",
+                                                 'data-target' => '#modal-person', 'class' => 'btn btn-primary'} %>
+          </div>
+          <div class="card-block">
+            <div class="table-responsive dt-responsive">
+              <table id="people_table" class="table table-striped table-bordered nowrap w-100">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                 <tbody> <!-- Ajax --> </tbody> 
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal para alta y edicion de persona -->
 <div class="modal fade" id="modal-person" tabindex="-1" role="dialog"
@@ -38,9 +72,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">¿ Esta seguro ?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
 
         <input id="person_id" type="hidden">
@@ -53,7 +84,5 @@
     </div>
   </div>
 </div>
-
-<%= link_to 'Volver', clients_path, class: 'btn u-btn-indigo' %>
 
 

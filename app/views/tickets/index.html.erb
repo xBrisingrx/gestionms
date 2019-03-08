@@ -1,37 +1,70 @@
-<div>
-  <div class="row">
-    <h2>Tickets</h2>
+<div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <i class="ti-headphone-alt bg-c-blue"></i>
+        <div class="d-inline">
+          <h5>Tickets registrados</h5>
+        <span>Descripcion de la vista</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="page-header-breadcrumb">
+        <ul class=" breadcrumb breadcrumb-title">
+          <li class="breadcrumb-item">
+            <%= link_to '<i class="ti-home"></i>'.html_safe, root_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Tickets', tickets_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <%= link_to 'Registrar ticket', new_ticket_path, class: 'btn btn-primary' %>
 </div>
- <br>
 
-  <!-- Nav tabs -->
-<ul class="nav justify-content-center u-nav-v5-1 u-nav-primary g-brd-bottom--md g-brd-gray-light-v4" role="tablist" data-target="nav-5-1-default-hor-left-border-bottom-icons" data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">
-      <i class="icon-christmas-037 u-tab-line-icon-pro g-mr-3"></i>
-      Sin asignar
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">
-      <i class="icon-communication-025 u-tab-line-icon-pro g-mr-3"></i>
-      En proceso
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">
-      <i class="icon-communication-017 u-tab-line-icon-pro g-mr-3"></i>
-      Finalizados
-    </a>
-  </li>
-</ul>
-<!-- End Nav tabs -->
+<div class="pcoded-inner-content">
+  <div class="main-body">
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="card">
+          <div class="card-header">
+            <%= link_to 'Registrar ticket <i class="fa fa-plus"></i>'.html_safe, new_ticket_path, class: 'btn btn-primary' %>
+          </div>
+          <div class="card-block">
+            <ul class="nav nav-tabs md-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Sin asignar</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">En proceso</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Finalizados</a>
+                <div class="slide"></div>
+              </li>
+            </ul>
 
-
-
-<br>
+            <div class="tab-content card-block">
+              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
+                <%= render('table_tickets', table: @table_process)%>
+              </div>
+              <div class="tab-pane" id="proceso" role="tabpanel">
+                <%= render('table_tickets', table: @table_process)%>
+              </div>
+              <div class="tab-pane" id="finalizados" role="tabpanel">
+                <%= render('table_tickets', table: @table_closed)%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="modal-ticket" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> </div>
 
@@ -78,21 +111,3 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-<!-- Tab panes -->
-<div id="tables" class="tab-content g-pt-20">
-  <div class="tab-pane fade show active" id="sin_asignar" role="tabpanel">
-    <%= render('table_tickets', table: @table_process)%>
-  </div>
-  <div class="tab-pane fade" id="proceso" role="tabpanel">
-    <!-- table process -->
-  </div>
-  <div class="tab-pane fade" id="finalizados" role="tabpanel">
-    <%= render('table_tickets', table: @table_closed)%>
-  </div>
-</div>
-<!-- End Tab panes -->

@@ -1,0 +1,47 @@
+<%= form_for @ticket, :html => { id: 'form-ticket'} do |form| %>
+
+  <input type="hidden" id="ticket_type_ticket" name="ticket[type_ticket]" >
+
+  <div class="form-group row">
+      <label for="ticket_assigned_to" class="col-sm-1 col-form-label">Encargado</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="ticket_assigned_to" name="ticket[assigned_to]">
+          <option value="0" selected>Sin encargado</option>
+            <% @people.each do |p| %>
+              <option value="<%= p.id %>"> <%= p.name %> </option>
+            <% end %>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group row">
+      <label for="ticket_client_id" class="col-sm-1 col-form-label">Empresa</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="ticket_client_id" name="ticket[client_id]">
+          <option disabled="" selected>Seleccione empresa</option>
+            <% @clients.each do |c| %>
+              <option value="<%= c.id %>"> <%= c.name %> </option>
+            <% end %>
+        </select>
+      </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :title, 'Asunto (*)', class: 'col-sm-1 col-form-label'  %>
+    <div class="col-sm-6">
+      <%= form.text_field :title, class:'form-control'%>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :detail, 'Motivo ', class: 'col-sm-1 col-form-label'  %><br>
+    <div class="col-sm-9">
+      <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0', placeholder: 'Descripción'%>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Agregar', class: 'btn btn-primary' %>
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+  </div>
+<% end %>

@@ -33,7 +33,7 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
-    @people = Person.where( client_id: 1 )
+    @people = Person.where( active: true )
     # @users = User.all
     @clients = Client.all
     respond_to do |format|

@@ -1,18 +1,45 @@
 $("#modal-person").html("<%= j (render 'form_edit') %>")
-
 $("#modal-person").modal('show')
 
+var form_edit_person = $('#form-edit-person').validate({
+	rules: {
+		'person[person_type_id]': {
+			required: true,
+			// Using the normalizer to trim the value of the element
+			// before validating it.
+			//
+			// The value of `this` inside the `normalizer` is the corresponding
+			// DOMElement. In this example, `this` references the `username` element.
+			normalizer: function(value) {
+				return $.trim(value);
+			}
+		},
+		'person[name]': {
+			required: true
+		},
+		'person[type_client]': {
+			required: true
+		},
+		'person[dni]': {
+			number: true
+		},
+		'person[phone]': {
+			number: true
+		}
+
+	}
+})
+
+
 $("#form-person").on("ajax:success", function(event) {
-  new Noty({
-      theme: 'bootstrap-v4',
-      type: 'success ',
-      layout: 'topRight',
-      text: " Edición exitosa ",
-      timeout: ( true, 1000 )
-  }).show()
-
-
+  people_table.ajax.reload(null,false)
+  noty_alert('success', 'Edición exitosa')
 }).on("ajax:error", function(event) {
-
-  return $("#form-person").append("<p>ERROR</p>");
+	$('#form-edit-person #error_explanation').hide(500)
+  $('#form-edit-person #error_list').empty()
+	var msj = jQuery.parseJSON( event.detail[2].response )
+	$.each( msj, function( key, value ) {
+	  $('#form-edit-person #error_list').append('<li> ' + key + ": " + value + ' </li>')
+	})
+	$('#form-edit-person #error_explanation').show('slow')
 })
