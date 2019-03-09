@@ -1,39 +1,58 @@
 <%= form_with(model: @user, remote: true, class: '') do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  <div id="error_explanation" class="alert alert-danger" style="display:none">
+    <ul id="error_list"></ul>
+  </div>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="form-group row">
+    <%= form.label :username,'Nombre de usuario', class: 'col-sm-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :username, class: 'form-control rounded-0' %>
     </div>
-  <% end %>
-
-  <div class="form-group row">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
   </div>
 
   <div class="form-group row">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.label :email,'Email', class: 'col-sm-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.text_field :email, class: 'form-control rounded-0' %>
+    </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.label :password,'Contraseña', class: 'col-sm-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.password_field :password, class: 'form-control rounded-0' %>
+    </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.label :password_confirmation,'Confirmar contraseña', class: 'col-sm-3 col-form-label' %>
+    <div class="col-9">
+      <%= form.password_field :password_confirmation, class: 'form-control rounded-0' %>
+    </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :person_id %>
-    <%= form.text_field :person_id %>
+    <label for="client_type_client_id" class="col-sm-3 col-form-label">Cliente</label>
+    <div class="col-sm-6">
+      <select class="form-control" id="person_person_type_id" name="person[person_type_id]" class="form-control">
+        <option disabled selected>Seleccione cliente</option>
+        <% @clients.each do |t|  %>
+          <option value="<%= t.id %>"><%= t.name %></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="user_person_id_id" class="col-sm-3 col-form-label">Cliente</label>
+    <div class="col-sm-6">
+      <select class="form-control" id="user_person_id" name="user[person_id]" class="form-control">
+        <option disabled selected>Seleccione cliente</option>
+        <% @clients.each do |t|  %>
+          <option value="<%= t.id %>"><%= t.name %></option>
+        <% end %>
+      </select>
+    </div>
   </div>
 
   <div class="actions">

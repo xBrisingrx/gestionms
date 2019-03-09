@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :no_login
+  layout false
+  
   def new
     if logged_in?
       redirect_to root_path
@@ -8,7 +10,7 @@ class SessionsController < ApplicationController
 
   def create
     # user = User.find_by_email(params[:email])
-    user = User.where(email: params[:email] , active: true ).take
+    user = User.where(username: params[:username] , active: true ).take
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       session[:username] = user.username

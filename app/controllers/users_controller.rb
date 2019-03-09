@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.where(active: true).order(username: :asc)
+    @title = 'Usuarios'
     respond_to do |format|
       format.html
       format.json
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @clients = Client.all
     respond_to do |format|
       format.js
     end
