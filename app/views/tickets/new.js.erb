@@ -2,4 +2,16 @@ $("#modal-ticket").html("<%= j (render 'modal_new_ticket') %>")
 $("#modal-ticket").modal('show')
 
 
-console.log('new ticket')
+// $('#ticket_client_id').on('change', function(event){
+// 	$.ajax({
+// 		url: 'clients/' + $(this).val() + '/people',
+// 		type: 'GET',
+// 		dataType: 'JSON',
+// 		success: function( reps ) {
+// 			console.log(resp)
+// 		}, 
+// 		error: function( resp ) {
+// 			console.log('fallo ' + resp)
+// 		}
+// 	})
+// })

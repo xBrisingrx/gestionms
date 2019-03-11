@@ -23,6 +23,13 @@ class PeopleController < ApplicationController
     end
   end
 
+  def get_for_client
+    @person = Person.find(params[:client_id])
+    respond_to do |format|
+      format.json
+    end
+  end
+
   # GET /people/new
   def new
     @client = Client.find(params[:client_id])

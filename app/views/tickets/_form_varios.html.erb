@@ -27,6 +27,15 @@
   </div>
 
   <div class="form-group row">
+      <label for="ticket_person_id" class="col-sm-1 col-form-label">Solicito</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="ticket_person_id" name="ticket[person_id]">
+          <option value="0" selected>Pidio el servicio</option>
+            <!-- ajax -->
+        </select>
+      </div>
+  </div>
+  <div class="form-group row">
     <%= form.label :title, 'Asunto (*)', class: 'col-sm-1 col-form-label'  %>
     <div class="col-sm-6">
       <%= form.text_field :title, class:'form-control'%>

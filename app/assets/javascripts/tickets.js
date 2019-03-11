@@ -5,8 +5,9 @@ var closed_tickets_table
 jQuery(document).ready(function($) {
   let btn_show_answer = true
   
-  $('#ticket_assigned_to').select2({ width: '100%',theme: "bootstrap4" })
   $('#ticket_client_id').select2({ width: '100%',theme: "bootstrap4" })
+  $('#ticket_assigned_to').select2({ width: '100%',theme: "bootstrap4" })
+  $('#ticket_person_id').select2({ width: '100%',theme: "bootstrap4" })
 
   $('#form-ticket').validate({
     rules: {
@@ -32,26 +33,26 @@ jQuery(document).ready(function($) {
 
 
   $("#ticket_client_id").on('change', function(event) {
-    console.log('change')
-    $.ajax({
-      url: '/clients/' + $("#ticket_client_id").val() + '/fleets.json',
-      type: 'GET',
-      dataType: 'JSON',
-      success: function ( resp ) {
-        $('#ticket_fleet_id').find('option').remove().end().append('<option value="" disabled selected>Seleccione un equipo</option>');
-        $( resp.data ).each(function(i, element){
-          $("#ticket_fleet_id").append("<option value="+element.id +">"+element.code +"</option>")
-        })
-      }
-    })
+    // $.ajax({
+    //   url: '/clients/' + $("#ticket_client_id").val() + '/fleets.json',
+    //   type: 'GET',
+    //   dataType: 'JSON',
+    //   success: function ( resp ) {
+    //     $('#ticket_fleet_id').find('option').remove().end().append('<option value="" disabled selected>Seleccione un equipo</option>');
+    //     $( resp.data ).each(function(i, element){
+    //       $("#ticket_fleet_id").append("<option value="+element.id +">"+element.code +"</option>")
+    //     })
+    //   }
+    // })
 
     $.ajax({
-      url: '/clients/' + $("#ticket_client_id").val() + '/persons.json',
+      url: '/clients/' + $(this).val() + '/people',
       type: 'GET',
       dataType: 'JSON',
       success: function ( resp ) {
-        $('#ticket_person_id').find('option').remove().end().append('<option value="" disabled selected>Seleccione un equipo</option>');
+        $('#ticket_person_id').find('option').remove().end().append('<option value="" disabled selected>Solicito el servicio</option>');
         $( resp.data ).each(function(i, element){
+          console.log( element.name )
           $("#ticket_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
         })
       }

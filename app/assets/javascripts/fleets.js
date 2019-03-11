@@ -1,4 +1,4 @@
-var clients_table
+var computers_table
 
 function modal_delete(id)
 {
@@ -8,13 +8,16 @@ function modal_delete(id)
 
 jQuery(document).ready(function($) {
 
-  clients_table = $("#clients_table").DataTable({
-    'ajax':'clients',
+  computers_table = $("#computers_table").DataTable({
+    'ajax':'fleets',
     'responsive': true,
     'columns': [
-    {'data': 'name'},
-    {'data': 'email'},
-    {'data': 'direction'},
+    {'data': 'code'},
+    {'data': 'person'},
+    {'data': 'ip_address'},
+    {'data': 'os'},
+    {'data': 'hardware'},
+    {'data': 'software'},
     {'data': 'actions'}
     ],
     'language': { 'url': "/assets/dataTables/Spanish.json"}

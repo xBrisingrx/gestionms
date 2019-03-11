@@ -1,0 +1,107 @@
+<div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <i class="ti-headphone-alt bg-c-blue"></i>
+        <div class="d-inline">
+          <h5>Flota</h5>
+        <span>Información de Computadoras, impresoras y equipos de red.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="page-header-breadcrumb">
+        <ul class=" breadcrumb breadcrumb-title">
+          <li class="breadcrumb-item">
+            <%= link_to '<i class="ti-home"></i>'.html_safe, root_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Clientes', clients_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Flota', client_fleets_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pcoded-inner-content">
+  <div class="main-body">
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="card">
+          <div class="card-header">
+            <%= link_to 'Registrar equipo <i class="fa fa-plus"></i>'.html_safe, new_client_fleet_path, 
+                  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-fleet', 'class' => 'btn btn-primary'} %>
+          </div>
+          <div class="card-block">
+            <ul class="nav nav-tabs md-tabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">PC Escritorio</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">Notebooks</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Impresoras</a>
+                <div class="slide"></div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Red</a>
+                <div class="slide"></div>
+              </li>
+            </ul>
+
+            <div class="tab-content card-block">
+              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
+                <%= render('table_computers', table: @computers)%>
+              </div>
+              <div class="tab-pane" id="finalizados" role="tabpanel">
+                <%= render('table_notebooks', table: @notebooks)%>
+              </div>
+              <div class="tab-pane" id="proceso" role="tabpanel">
+                <%= render('table_printers', table: @printers)%>
+              </div>
+              <div class="tab-pane" id="finalizados" role="tabpanel">
+                <%= render('table_network', table: @network)%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para alta y edicion de persona -->
+<div class="modal fade" id="modal-fleet" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+</div>
+<!-- End modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_delete_fleet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¿ Esta seguro ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+        <input id="person_id" type="hidden">
+        <input id="client_id" type="hidden">
+
+      <div class="modal-footer">
+        <button type="button" class="btn u-btn-red" onclick=delete_person()>Eliminar</button>
+        <button type="button" class="btn u-btn-indigo" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

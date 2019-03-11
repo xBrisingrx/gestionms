@@ -1,0 +1,159 @@
+<!--=== Formulario alta de equipo ===-->
+<div class="container content">
+  <div class="col md-9">
+    <div class="row margin-bottom-40">
+      <div class="class col-md-6">
+        <form id="tipoEquipo" class="sky-form">
+          <fieldset>
+            <section>
+              <label class="label">Tipo de equipo</label>
+              <div class="inline-group">
+                <label class="radio"><input type="radio" name="radioName" value="Computadora" checked><i class="rounded-x"></i>PC</label>
+                <label class="radio"><input type="radio" name="radioName" value="Red"><i class="rounded-x"></i>Red</label>
+                <label class="radio"><input type="radio" name="radioName" value="Impresora"><i class="rounded-x"></i>Impresora</label>
+                <label class="radio"><input type="radio" name="radioName" value="Monitor"><i class="rounded-x"></i>Monitor</label>
+              </div>
+            </section>
+          </fieldset>
+        </form>
+        <%= render 'computers/new' %>
+
+
+        <!-- Formulario equipos de RED -->
+        <form action="<?php echo base_url('index.php/Flota/altaRed');?>" class="sky-form altaRed" style="display: none;" method="POST">
+          <input type="hidden" id="idCliente" name="idEmpresa" value="<?php echo $cliente;?>">
+          <fieldset>
+            <div class="row">
+              <section class="col col-4">
+                <label for="codigoEquipoRed" class="input">
+                  <input type="text" name="codigoEquipoRed" placeholder="Código">
+                  <b class="tooltip tooltip-bottom-right">Código de faja de seguridad</b>
+                </label>
+              </section>
+              <section class="col col-4">
+                <label for="ipEquipoRed" class="input">
+                  <input type="text" name="ipEquipoRed" placeholder="IP">
+                  <b class="tooltip tooltip-bottom-right">Dirección equipo</b>
+                </label>
+              </section>
+              <section class="col col-4">
+                <label class="input">
+                  <i class="icon-append fa fa-calendar"></i>
+                  <input type="text" name="fechaAltaEquipoRed" id="fechaAltaEquipoRed">
+                </label>
+              </section>
+            </div>
+            <div class="row">
+              <section class="col col-6">
+                <label class="label">Características</label>
+                <label class="textarea">
+                  <i class="icon-append fa fa-comment"></i>
+                  <textarea rows="4" name="caracteristicasRed" id="caracteristicasRed"></textarea>
+                </label>
+              </section>
+            </div>
+          </fieldset>
+            <footer>
+              <button type="submit" class="btn-u">Agregar</button>
+              <a href="<?php echo base_url('index.php/Clientes');?>" class="btn-u btn-u-red">Cancelar</a>
+            </footer>
+        </form>
+
+        <!-- Form equipos de impresoras -->
+        <form action="<?php echo base_url('index.php/Flota/altaImpresora');?>" class="sky-form altaImpresora" style="display: none;" method="POST">
+          <input type="hidden" id="idCliente" name="idEmpresa" value="<?php echo $cliente;?>">
+          <fieldset>
+            <div class="row">
+              <section class="col col-6">
+                <label for="empleadoImpresora" class="select">
+                  <select name="empleadoImpresora" id="empleadoImpresora">
+                    <option value="" disabled selected>Seleccione un usuario</option>
+                    <?php foreach ($empleados as $row) { ?>
+                    <option value="<?php echo $row->id ?>"><?php echo $row->nombre.' '.$row->apellido;?></option>
+                  <?php } ?>
+                  </select>
+                </label>
+                <?php echo form_error('empleadoImpresora') ?>
+              </section>
+              <section class="col col-4">
+                <label for="codigoEquipoImpresora" class="input">
+                  <input type="text" name="codigoEquipoImpresora" placeholder="Código">
+                  <b class="tooltip tooltip-bottom-right">Código de faja de seguridad</b>
+                </label>
+                <?php echo form_error('codigoEquipoImpresora') ?>
+              </section>
+            <div class="row">
+              <section class="col col-4">
+                <label class="input">
+                  <i class="icon-append fa fa-calendar"></i>
+                  <input type="text" name="fechaAltaImpresora" id="fechaAltaImpresora">
+                </label>
+              </section>
+              <section class="col col-6">
+                <label for="ipImpresora" class="input">
+                  <input type="text" name="ipImpresora" placeholder="IP impresora">
+                  <b class="tooltip tooltip-bottom-right">Ingrese el ip si la impresora esta en red</b>
+                </label>
+                <?php echo form_error('ipImpresora') ?>
+              </section>
+            </div>
+              <section class="col col-6">
+                <label for="caracteristicasImpresora" class="input">
+                  <input type="text" name="caracteristicasImpresora" placeholder="Características">
+                  <b class="tooltip tooltip-bottom-right">Ingrese marca y modelo</b>
+                </label>
+              </section>
+            </div>
+          </fieldset>
+            <footer>
+              <button type="submit" class="btn-u">Agregar</button>
+              <a href="<?php echo base_url('index.php/Clientes');?>" class="btn-u btn-u-red">Cancelar</a>
+            </footer>
+        </form>
+
+        <!-- Form equipos de monitores -->
+        <form action="<?php echo base_url('index.php/Flota/altaMonitor');?>" class="sky-form altaMonitor" style="display: none;" method="POST">
+          <input type="hidden" id="idCliente" name="idEmpresa" value="<?php echo $cliente;?>">
+          <fieldset>
+            <div class="row">
+              <section class="col col-4">
+                <label for="empleadoMonitor" class="select">
+                  <select name="empleadoMonitor" id="empleadoMonitor">
+                    <option value="" disabled selected>Seleccione un usuario</option>
+                    <?php foreach ($empleados as $row) { ?>
+                    <option value="<?php echo $row->id ?>"><?php echo $row->nombre.' '.$row->apellido;?></option>
+                  <?php } ?>
+                  </select>
+                </label>
+              </section>
+              <section class="col col-4">
+                <label for="codigoEquipoMonitor" class="input">
+                  <input type="text" name="codigoEquipoMonitor" placeholder="Código">
+                  <b class="tooltip tooltip-bottom-right">Código de faja de seguridad</b>
+                </label>
+              </section>
+                                    <section>
+                                        <label class="label">Select single date</label>
+                                        <label class="input">
+                                            <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="date" id="date">
+                                        </label>
+                                    </section>
+              <section class="col col-6">
+                <label for="caracteristicasMonitor" class="input">
+                  <input type="text" name="caracteristicasMonitor" placeholder="Características">
+                  <b class="tooltip tooltip-bottom-right">Ingrese marca y modelo</b>
+                </label>
+              </section>
+            </div>
+          </fieldset>
+            <footer>
+              <button type="submit" class="btn-u">Agregar</button>
+              <a href="<?php echo base_url('index.php/Clientes');?>" class="btn-u btn-u-red">Cancelar</a>
+            </footer>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--=== Fin formulario alta equipo ===-->

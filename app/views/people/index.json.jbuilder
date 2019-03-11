@@ -1,7 +1,3 @@
-# json.array! @people
-
-# json.extract! @people, :name, :dni, :email, :phone, :client_id
-
 json.data @people do |p|
 	json.id p.id
 	json.name p.name

@@ -24,8 +24,11 @@ TicketType.create(name: "Asistencia remota", comment: "Asistencia por teamviewer
 TicketType.create(name: "Servicio electronico" , comment: "Trabajos para Oscar.")
 TicketType.create(name: "Soporte de camaras")
 TicketType.create(name: "Varios")
-FleetType.create(name: "Computadora")
+FleetType.create(name: "PC Escritorio")
+FleetType.create(name: "Notebook")
 FleetType.create(name: "Impresora")
 FleetType.create(name: "Red")
+Rol.create(name: "Administrador")
+Rol.create(name: "Cliente")
 
 

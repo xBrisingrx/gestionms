@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_004154) do
+ActiveRecord::Schema.define(version: 2019_03_10_004054) do
 
   create_table "client_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
@@ -50,9 +50,11 @@ ActiveRecord::Schema.define(version: 2019_02_24_004154) do
 
   create_table "fleets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "code"
+    t.string "model", limit: 30
     t.bigint "ip_address"
     t.string "hardware"
-    t.string "software"
+    t.string "software", comment: "Software particular que lleve el equipo"
+    t.string "os", limit: 20, comment: "Sistema Operativo"
     t.boolean "active", default: true
     t.bigint "client_id"
     t.bigint "person_id"
@@ -92,6 +94,12 @@ ActiveRecord::Schema.define(version: 2019_02_24_004154) do
     t.string "name", limit: 50
     t.string "comment"
     t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rols", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name", limit: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -174,8 +182,10 @@ ActiveRecord::Schema.define(version: 2019_02_24_004154) do
     t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "rol_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
+    t.index ["rol_id"], name: "index_users_on_rol_id"
   end
 
   add_foreign_key "clients", "client_types"
@@ -197,4 +207,5 @@ ActiveRecord::Schema.define(version: 2019_02_24_004154) do
   add_foreign_key "tickets", "ticket_types"
   add_foreign_key "tickets", "users"
   add_foreign_key "users", "people"
+  add_foreign_key "users", "rols"
 end

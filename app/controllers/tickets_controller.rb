@@ -33,7 +33,7 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
-    @people = Person.where( active: true )
+    @people = Person.where(client_id: 1 , active: true )
     # @users = User.all
     @clients = Client.all
     respond_to do |format|
@@ -55,8 +55,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     @ticket.active = true
     @ticket.user_id = current_user.id
-    @ticket.state_ticket = 'state'
-    @ticket.priority = 'priority'
+    @ticket.ticket_status_id = 2
+    @ticket.ticket_priority_id = 2
 
     respond_to do |format|
       if @ticket.save!

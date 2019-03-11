@@ -1,0 +1,45 @@
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Registro de equipo</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ul class="nav nav-tabs md-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#dekstop" role="tab">PC Escritorio</a>
+          <div class="slide"></div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#notebook" role="tab">Notebooks</a>
+          <div class="slide"></div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#printers" role="tab">Impresoras</a>
+          <div class="slide"></div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#network" role="tab">Red</a>
+          <div class="slide"></div>
+        </li>
+      </ul>
+
+      <div class="tab-content card-block">
+        <div class="tab-pane active" id="dekstop" role="tabpanel">
+          <%= render('form_computers', fleet_type: 1)%>
+        </div>
+        <div class="tab-pane" id="notebook" role="tabpanel">
+          <%= render('table_notebooks', fleet_type: 2)%>
+        </div>
+        <div class="tab-pane" id="printers" role="tabpanel">
+          <%= render('table_printers', fleet_type: 3)%>
+        </div>
+        <div class="tab-pane" id="network" role="tabpanel">
+          <%= render('table_network', fleet_type: 4)%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type fleet:</strong>
+  <%= @fleet.type_fleet %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @fleet.code %>
+</p>
+
+<p>
+  <strong>Ip address:</strong>
+  <%= @fleet.ip_address %>
+</p>
+
+<p>
+  <strong>Hardware:</strong>
+  <%= @fleet.hardware %>
+</p>
+
+<p>
+  <strong>Software:</strong>
+  <%= @fleet.software %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @fleet.client %>
+</p>
+
+<%= link_to 'Edit', edit_fleet_path(@fleet) %> |
+<%= link_to 'Back', fleets_path %>

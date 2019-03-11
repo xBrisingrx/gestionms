@@ -1,0 +1,19 @@
+$("#modal-fleet").html("<%= j (render 'form') %>")
+$("#modal-fleet").modal('show')
+
+$('#fleet_person_id').select2({ width: '90%',theme: "bootstrap4" })
+$('#fleet_os').select2({ width: '90%',theme: "bootstrap4" })
+
+$("#form-fleet").on("ajax:success", function(event) {
+  console.log('ajax success')
+  new Noty({
+      theme: 'bootstrap-v4',
+      type: 'success ',
+      layout: 'topRight',
+      text: " Alta exitosa ",
+      timeout: ( true, 1000 )
+  }).show()
+
+}).on("ajax:error", function(event) {
+  return $("#form-fleet").append("<p>ERROR</p>");
+})

@@ -6,8 +6,8 @@ json.data @clients do |c|
   json.email c.email
   json.direction c.direction
   json.actions "<div class='btn-group btn-sm' role='group' >
-                <button id='btn-employee' type='button' class='btn btn-secondary dropdown-toggle waves-effect waves-light btn-sm' data-toggle='dropdown'
-                    aria-haspopup='true' aria-expanded='false'>
+                <button id='btn-employee' type='button' class='btn btn-secondary dropdown-toggle waves-effect waves-light btn-sm' 
+                        data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                   <i class='fa fa-users' aria-hidden='true'></i>
                 </button>
                 <div class='dropdown-menu' aria-labelledby='btn-employee' >
@@ -16,8 +16,8 @@ json.data @clients do |c|
                         href='/clients/#{c.id}/people/new'>Agregar</a>
                 </div>
 
-                <button id='btn-computers' type='button' class='btn btn-secondary dropdown-toggle waves-effect waves-light btn-sm ml-1' data-toggle='dropdown'
-                    aria-haspopup='true' aria-expanded='false'>
+                <button id='btn-computers' type='button' class='btn btn-secondary dropdown-toggle waves-effect waves-light btn-sm ml-1' 
+                        data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                   <i class='fa fa-desktop' aria-hidden='true'></i>
                 </button>
                 <div class='dropdown-menu' aria-labelledby='btn-computers' >

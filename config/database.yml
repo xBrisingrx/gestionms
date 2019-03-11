@@ -17,9 +17,9 @@ development: &default
     adapter: mysql2
     encoding: utf8mb4
     collation: utf8mb4_bin
-    username: root
-    password: asd
-    database: gestion_ms
+    username: <%= ENV['DB_USER'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
+    database: <%= ENV['DATABASE'] %>
     host:     localhost
 
 # Warning: The database defined as "test" will be erased and

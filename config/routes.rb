@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   resources :clients do
   	resources :people
+    resources :fleets
   end
 
   post 'disabled_client', to: 'clients#disabled', as: 'disabled_client'
@@ -21,5 +22,6 @@ Rails.application.routes.draw do
       get '/tickets/close_ticket', to: 'tickets#close_ticket', as: 'close_ticket'
     end
   end
+
 
 end

@@ -52,13 +52,13 @@
 
             <div class="tab-content card-block">
               <div class="tab-pane active" id="sin_asignar" role="tabpanel">
-                <%= render('form_varios', ticket: @ticket)%>
+                <%= render('form_varios', ticket: @ticket, type_ticket: 1 )%>
               </div>
               <div class="tab-pane" id="proceso" role="tabpanel">
-                <%= render('form', ticket: @ticket)%>
+                <%= render('form', ticket: @ticket, type_ticket: 2 )%>
               </div>
               <div class="tab-pane" id="finalizados" role="tabpanel">
-                <%= render('form', ticket: @ticket)%>
+                <%= render('form', ticket: @ticket, type_ticket: 3 )%>
               </div>
             </div>
           </div>

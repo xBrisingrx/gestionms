@@ -6,6 +6,14 @@ class FleetsController < ApplicationController
   def index
     @client = Client.find(params[:client_id])
     @fleets = Fleet.where(client_id: params[:client_id], active: true)
+    @computers = { title: 'PC de escritorio', id: 'table_computers', 
+                   cols: ['Código', 'IP', 'Hardware', 'Software', 'Encargado', 'Acciones'] }
+    @notebooks = { title: 'Notebooks', id: 'table_notebookes',
+                   cols: ['Código', 'Modelo', 'IP', 'Hardware', 'Software', 'Encargado', 'Acciones'] }
+    @printers = { title: 'Impresoras', id: 'table_printers',
+                   cols: ['Código', 'Modelo' ,'IP', 'Acciones'] }
+    @network = { title: 'Equipos de red', id: 'table_network',
+                   cols: ['Código', 'Modelo' ,'IP', 'Acciones'] }
     respond_to do |format|
       format.html
       format.js
@@ -22,6 +30,7 @@ class FleetsController < ApplicationController
   def new
     @client = Client.find(params[:client_id])
     @people = Person.where(client_id: params[:client_id])
+    @operative_system = [ 'Windows 7', 'Windows 10', 'Windows XP', 'Archlinux', 'Debian', 'Ubuntu' ]
     respond_to do |format|
       format.js
     end
@@ -39,12 +48,11 @@ class FleetsController < ApplicationController
   def create
     @client = Client.find(params[:client_id])
     @fleet = @client.fleets.create(fleet_params)
-    @fleet.active = true
 
     respond_to do |format|
       if @fleet.save
         format.html { redirect_to client_fleets_path(@client), notice: 'Fleet was successfully created.' }
-        format.json { render :show, status: :created, location: @fleet }
+        format.json { render 'success', status: :created, location: @fleet }
         format.js
       else
         format.html { render :new }
@@ -91,6 +99,6 @@ class FleetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fleet_params
-      params.require(:fleet).permit(:type_fleet, :code, :ip_address, :hardware, :software, :client_id, :person_id, :active)
+      params.require(:fleet).permit(:fleet_type_id, :code, :model, :os, :ip_address, :hardware, :software, :client_id, :person_id, :active)
     end
 end
