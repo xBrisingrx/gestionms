@@ -1,29 +1,20 @@
-<%= form_for @ticket, :html => {class: "g-brd-around g-brd-gray-light-v4 g-pa-30 g-mb-30", id: 'form-ticket'} do |form| %>
-  <% if @ticket.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this client from being saved:</h2>
-      <ul>
-      <% ticket.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for @ticket, :html => {id: 'form-ticket'} do |form| %>
+
 
   <div class="form-group row">
-      <label for="ticket_type_ticket" class="col-sm-3 col-form-label">Tipo ticket</label>
+      <label for="ticket_ticket_type_id" class="col-sm-1 col-form-label">Tipo ticket</label>
       <div class="col-sm-6">
-        <select class="form-control" id="ticket_type_ticket" name="ticket[type_ticket]">
-          <option value="Soporte técnico">Soporte técnico</option>
-          <option value="Correo">Correo</option>
+        <select class="form-control select-ticket" id="ticket_ticket_type_id" name="ticket[ticket_type_id]">
+          <option value="1">Soporte técnico</option>
+          <option value="2">Asistencia remota</option>
         </select>
       </div>
   </div>
 
   <div class="form-group row">
-      <label for="ticket_assigned_to" class="col-sm-3 col-form-label">Encargado</label>
+      <label for="ticket_assigned_to" class="col-sm-1 col-form-label">Encargado</label>
       <div class="col-sm-6">
-        <select class="form-control" id="ticket_assigned_to" name="ticket[assigned_to]">
+        <select class="form-control select-ticket" id="ticket_assigned_to" name="ticket[assigned_to]">
           <option value="0" selected>Sin encargado</option>
             <% @people.each do |p| %>
               <option value="<%= p.id %>"> <%= p.name %> </option>
@@ -33,9 +24,9 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_client_id" class="col-sm-3 col-form-label">Empresa</label>
+      <label for="ticket_client_id" class="col-sm-1 col-form-label">Empresa</label>
       <div class="col-sm-6">
-        <select class="form-control" id="ticket_client_id" name="ticket[client_id]">
+        <select class="form-control select-ticket" id="ticket_client_id" name="ticket[client_id]">
           <option disabled="" selected>Seleccione empresa</option>
             <% @clients.each do |c| %>
               <option value="<%= c.id %>"> <%= c.name %> </option>
@@ -45,9 +36,9 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_fleet_id" class="col-sm-3 col-form-label">Equipo </label>
+      <label for="ticket_fleet_id" class="col-sm-1 col-form-label">Equipo </label>
       <div class="col-sm-6">
-        <select class="form-control" id="ticket_fleet_id" name="ticket[fleet_id]">
+        <select class="form-control select-ticket" id="ticket_fleet_id" name="ticket[fleet_id]">
           <option disabled="" selected>Seleccione equipo</option>
            <!-- Ajax -->
         </select>
@@ -55,9 +46,9 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_person_id" class="col-sm-3 col-form-label">Quien pidio </label>
+      <label for="ticket_person_id" class="col-sm-1 col-form-label">Quien pidio </label>
       <div class="col-sm-6">
-        <select class="form-control" id="ticket_person_id" name="ticket[person_id]">
+        <select class="form-control select-ticket" id="ticket_person_id" name="ticket[person_id]">
           <option disabled="" selected>Seleccione persona</option>
            <!-- Ajax -->
         </select>
@@ -65,12 +56,14 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label :title, 'Asunto (*)', class: 'col-sm-2 col-form-label g-mb-5'  %><br>
-    <%= form.text_field :title, class:'form-control'%>
+    <%= form.label :title, 'Asunto (*)', class: 'col-sm-1 col-form-label'  %>
+    <div class="col-sm-6">
+      <%= form.text_field :title, class:'form-control'%>
+    </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :detail, 'Motivo ', class: 'col-sm-2 col-form-label g-mb-5'  %><br>
+    <%= form.label :detail, 'Motivo ', class: 'col-sm-1 col-form-label g-mb-5'  %><br>
     <div class="col-sm-9">
       <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0', placeholder: 'Descripción'%>
     </div>
@@ -78,6 +71,6 @@
 
   <div class="actions">
     <%= form.submit 'Agregar', class: 'btn btn-primary' %>
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+    <%= link_to 'Cancelar', tickets_path, class: 'btn btn-danger' %>
   </div>
 <% end %>

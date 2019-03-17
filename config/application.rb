@@ -32,5 +32,14 @@ module Gestionms
 
     # Add fonts directory in assets
     # config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # Configuracion para usar variables de entorno
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      YAML.load(File.open(env_file)).each do |key, value|
+        ENV[key.to_s] = value
+      end if File.exists?(env_file)
+    end
+    
   end
 end

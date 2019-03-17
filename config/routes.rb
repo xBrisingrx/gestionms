@@ -17,11 +17,14 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   resources :tickets do
-    resources :answers
+    
+    resources :ticket_answers
     member do
-      get '/tickets/close_ticket', to: 'tickets#close_ticket', as: 'close_ticket'
+      post '/tickets/close_ticket', to: 'tickets#close_ticket', as: 'close_ticket'
     end
   end
 
+  get 'tickets/get_tickets/:ticket_status_id', to: 'tickets#get_tickets', as: 'get_tickets'
+  get 'count_tickets', to: 'tickets#count_tickets', as: 'count_tickets'
 
 end

@@ -10,24 +10,39 @@ class TicketsController < ApplicationController
   # GET /clients.json
   def index
     @title = 'Tickets'
-    @open_tickets = Ticket.where(active: true, ticket_status_id: 1 ).order(id: :asc)
-    @table_process = { title: 'Tickets en proceso', id: 'open_tickets_table' }
-    @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table' }
+    @all_tickets = Ticket.group(:ticket_status_id).count
+    @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table', total: @all_tickets[1] }
+    @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table', total: @all_tickets[2] }
+    @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table', total: @all_tickets[3] }
+
     # UserMailer.welcome_email.deliver
     respond_to do |format|
       format.html
-      format.json
+      format.json { render json: Ticket.group(:ticket_status_id).count }
     end
   end
 
+  def get_tickets 
+    @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+    respond_to do |format|
+      format.json { render :index }
+    end
+  end
+
+  def count_tickets
+    @count_tickets = Ticket.group(:ticket_status_id).count
+    respond_to do |format|
+      format.json { render :json => @count_tickets }
+    end
+  end
 
   def show
     @title = 'Ver ticket'
     @ticket_create = Ticket.find(params[:id])
-    @answers = Answer.where(ticket_id: params[:id]).order(id: :desc)
+    @answers = TicketAnswer.where(ticket_id: params[:id]).order(id: :desc)
     respond_to do |format|
       format.html
-      format.js
+      # format.js
     end
   end
 
@@ -53,14 +68,18 @@ class TicketsController < ApplicationController
   # POST /clients.json
   def create
     @ticket = Ticket.new(ticket_params)
-    @ticket.active = true
+
     @ticket.user_id = current_user.id
-    @ticket.ticket_status_id = 2
-    @ticket.ticket_priority_id = 2
+    
+    if params[:assigned_to].nil?
+      @ticket.ticket_status_id = 2
+    else 
+      @ticket.ticket_status_id = 1
+    end
 
     respond_to do |format|
       if @ticket.save!
-        UserMailer.with(ticket: @ticket).welcome_email.deliver_later
+        UserMailer.with(ticket: @ticket).welcome_email.deliver_later!
         format.html { redirect_to tickets_path, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
@@ -87,10 +106,16 @@ class TicketsController < ApplicationController
   end
 
   def close_ticket
-    if @ticket.update(state_ticket: 'closed')
-      redirect_to tickets_path, notice: 'Ticket dado de baja con éxito.'
-    else
-      edirect_to tickets_path, notice: 'ERROR: No se pudo dar de baja al ticket.'
+    @answer = TicketAnswer.new
+    @answer.ticket_id = params[:id]
+    @answer.detail = params[:detail]
+    @answer.user_id = current_user.id
+    respond_to do |format|
+      if @ticket.update(ticket_status_id: 3) and @answer.save
+        format.json { render json: { status: true }, status: :ok }
+      else
+        format.json { render json: @answer.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -127,6 +152,6 @@ class TicketsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
       params.require(:ticket).permit(:client_id, :fleet_id, :user_id, :person_id, :assigned_to, :detail,
-                                     :ticket_status_id, :ticket_type_id, :ticket_priority_id, :ticket_type_id, :title, :report, :active)
+                                     :ticket_status_id, :ticket_type_id, :ticket_priority_id, :title, :report, :active)
     end
 end

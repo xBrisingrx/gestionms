@@ -3,9 +3,9 @@ class UserMailer < ApplicationMailer
   layout 'mailer'
 
   def welcome_email
-    # @ticket = params[:ticket]
+    @ticket = params[:ticket]
     @url  = 'http://example.com/login'
-    mail(to: 'sistemas@maurosampaoli.com.ar', subject: '@ticket.title')
+    mail(to: 'sistemas@maurosampaoli.com.ar', subject: @ticket.title)
   end
 
 end

@@ -1,10 +1,10 @@
-class AnswersController < ApplicationController
+class TicketAnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    @answers = TicketAnswer.all
   end
 
   # GET /answers/1
@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/new
   def new
-    @answer = Answer.new
+    @answer = TicketAnswer.new
   end
 
   # GET /answers/1/edit
@@ -26,11 +26,11 @@ class AnswersController < ApplicationController
   def create
     @ticket = Ticket.find(params[:ticket_id])
 
-    if @ticket.state_ticket == 'closed'
-      @ticket.update(state_ticket: 'open')
-    end
+    # if @ticket.state_ticket == 'closed'
+    #   @ticket.update(state_ticket: 'open')
+    # end
 
-    @answer = @ticket.answers.create(answer_params)
+    @answer = @ticket.ticket_answers.create(answer_params)
     @answer.user_id = current_user.id
     @answer.active = true
 
@@ -72,12 +72,12 @@ class AnswersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
-      @answer = Answer.find(params[:id])
+      @answer = TicketAnswer.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
       # params.fetch(:answer, {})
-      params.require(:answer).permit(:detail)
+      params.require(:ticket_answer).permit(:detail)
     end
 end

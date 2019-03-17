@@ -28,16 +28,16 @@
 
       <div class="tab-content card-block">
         <div class="tab-pane active" id="dekstop" role="tabpanel">
-          <%= render('form_computers', fleet_type: 1)%>
+          <%= render('form_computers', fleet_type: 'A')%>
         </div>
         <div class="tab-pane" id="notebook" role="tabpanel">
-          <%= render('table_notebooks', fleet_type: 2)%>
+          <%= render('form_notebooks', fleet_type: 'A')%>
         </div>
         <div class="tab-pane" id="printers" role="tabpanel">
-          <%= render('table_printers', fleet_type: 3)%>
+          <%= render('form_printers', fleet_type: 'A')%>
         </div>
         <div class="tab-pane" id="network" role="tabpanel">
-          <%= render('table_network', fleet_type: 4)%>
+          <%= render('form_network', fleet_type: 'A')%>
         </div>
       </div>
     </div>

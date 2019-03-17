@@ -35,22 +35,28 @@
           <div class="card-block">
             <ul class="nav nav-tabs md-tabs" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Sin asignar</a>
+                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Sin asignar 
+                  <label id="label-sin-asignar" class="badge badge-primary"> <%= @table_open[:total] %> </label>
+                </a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">En proceso</a>
+                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">En proceso
+                  <label id="label-process" class="badge badge-primary"> <%= @table_process[:total] %> </label>
+                </a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Finalizados</a>
+                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Finalizados
+                  <label id="label-closed" class="badge badge-primary"> <%= @table_closed[:total] %> </label>
+                </a>
                 <div class="slide"></div>
               </li>
             </ul>
 
             <div class="tab-content card-block">
               <div class="tab-pane active" id="sin_asignar" role="tabpanel">
-                <%= render('table_tickets', table: @table_process)%>
+                <%= render('table_tickets', table: @table_open)%>
               </div>
               <div class="tab-pane" id="proceso" role="tabpanel">
                 <%= render('table_tickets', table: @table_process)%>
@@ -96,17 +102,19 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Confirmaci&oacute;n</h4>
+          Esta seguro de finalizar el ticket?
         </div>
         <div class="modal-body">
-          Esta seguro de finalizar el ticket?
+          
+          <div class="row m-r-5 m-l-5">
+            <label class="col-form-label w-100"> Actividad realizada: </label>
+            <textarea id="close_message" class="form-control"></textarea>
+          </div>
         </div>
         <input type="hidden" id="close_ticket_id" name="close_ticket_id" value=""/>
         <div class="modal-footer">
           <button type="button" class="btn btn-default btn_cerrar" data-dismiss="modal">Cancelar</button>
           <button type="button" class="btn_destroy_ticket btn btn-primary"> finalizar</button>
-          <!-- <a id="finalizarTickets" type="button" class="btn btn-primary">Finalizar</a> -->
         </div>
       </div>
     </div>

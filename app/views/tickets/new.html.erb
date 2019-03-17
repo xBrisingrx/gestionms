@@ -41,24 +41,20 @@
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">Soporte técnico</a>
-                <div class="slide"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Pedido de mail</a>
+                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">Soporte técnico/Remoto</a>
                 <div class="slide"></div>
               </li>
             </ul>
 
             <div class="tab-content card-block">
               <div class="tab-pane active" id="sin_asignar" role="tabpanel">
-                <%= render('form_varios', ticket: @ticket, type_ticket: 1 )%>
+                <%= render('form_varios', ticket: @ticket, ticket_type: 1 )%>
               </div>
               <div class="tab-pane" id="proceso" role="tabpanel">
-                <%= render('form', ticket: @ticket, type_ticket: 2 )%>
+                <%= render('form', ticket: @ticket, ticket_type: 2 )%>
               </div>
               <div class="tab-pane" id="finalizados" role="tabpanel">
-                <%= render('form', ticket: @ticket, type_ticket: 3 )%>
+                <%= render('form', ticket: @ticket, ticket_type: 3 )%>
               </div>
             </div>
           </div>

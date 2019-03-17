@@ -85,11 +85,6 @@ class FleetsController < ApplicationController
     end
   end
 
-  def get_fleets
-    @fleets = Fleet.where(client_id: :client_id)
-    format.json { render :json => @fleets }
-  end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
