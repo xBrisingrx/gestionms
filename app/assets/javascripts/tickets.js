@@ -149,9 +149,9 @@ jQuery(document).ready(function($) {
 
   $('#asignar_ticket').on('click',function(event){
     $.ajax({
-      url: 'tickets/' + $('#assigned_ticket_id').val() + '/update',
+      url: 'assign_person',
       type: 'POST',
-      data:{ assigned_to: $('#ticket_assigned_to').val() },
+      data:{ id: $('#assigned_ticket_id').val( ) ,assigned_to: $('#ticket_assigned_to').val() },
       success: function( msg ) {
         process_tickets_table.ajax.reload(null,false)
         open_tickets_table.ajax.reload(null,false)

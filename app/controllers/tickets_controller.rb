@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy, :close_ticket]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy, :close_ticket, :assign_person]
   # Es lo mismo que escribir
   # self.before_action(:set_person, {:only => [:show, :edit, :update, :destroy]})
   # es lo mismo, porque por un conjunto de reglas de ruby , tenés que el último
