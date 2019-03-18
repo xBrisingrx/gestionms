@@ -10,10 +10,10 @@ class TicketsController < ApplicationController
   # GET /clients.json
   def index
     @title = 'Tickets'
-    @all_tickets = Ticket.group(:ticket_status_id).count
-    @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table', total: @all_tickets[1] }
-    @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table', total: @all_tickets[2] }
-    @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table', total: @all_tickets[3] }
+    @people = Person.where( client_id: 1 )
+    @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table' }
+    @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table' }
+    @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table' }
 
     # UserMailer.welcome_email.deliver
     respond_to do |format|
@@ -32,7 +32,7 @@ class TicketsController < ApplicationController
   def count_tickets
     @count_tickets = Ticket.group(:ticket_status_id).count
     respond_to do |format|
-      format.json { render :json => @count_tickets }
+      format.json { render :json => { open: @count_tickets[1] , process: @count_tickets[2], closed: @count_tickets[3]  } }
     end
   end
 
@@ -117,6 +117,10 @@ class TicketsController < ApplicationController
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def assign_person
+    
   end
 
   # DELETE /clients/1

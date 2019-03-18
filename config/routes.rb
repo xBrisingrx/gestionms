@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   get 'tickets/get_tickets/:ticket_status_id', to: 'tickets#get_tickets', as: 'get_tickets'
   get 'count_tickets', to: 'tickets#count_tickets', as: 'count_tickets'
+  get 'assign_person', to: 'tickets#assign_person', as: 'assign_person'
 
 end

@@ -15,6 +15,16 @@ function modal_close_ticket(id)
   $('#modal_close_ticket').modal('show')
 }
 
+function modal_asignar_ticket(id)
+{
+  $('#assigned_ticket_id').val( id )
+  $('#modal_assigned_ticket').modal('show')
+}
+
+
+
+
+
 function count_tickets()
 {
   $.ajax({
@@ -22,7 +32,10 @@ function count_tickets()
     type: 'GET',
     dataType: 'JSON',
     success: function( msg ) {
-      console.log( msg )
+      console.log(msg)
+      $('#label-sin-asignar').text( msg['open'] )
+      $('#label-process').text( msg['process'] )
+      $('#label-closed').text( msg['closed'] )
     },
     error: function( msg ) {
       console.log( msg )
@@ -122,10 +135,7 @@ jQuery(document).ready(function($) {
           process_tickets_table.ajax.reload(null,false)
           closed_tickets_table.ajax.reload(null,false)
           $('#modal_close_ticket').modal('hide')
-
-          $('#label-process').text( parseInt($('#label-process').text()) - 1 )
-          $('#label-closed').text( parseInt($('#label-closed').text()) + 1 )
-
+          count_tickets()
           noty_alert('success', 'Ticket finalizado con éxito')
         } else {
           noty_alert('error', 'Ocurrio un error: no se pudo finalizar el ticket')
@@ -133,6 +143,21 @@ jQuery(document).ready(function($) {
       },
       error: function(msg){
         console.log('error ajax')
+      }
+    })
+  })
+
+  $('#asignar_ticket').on('click',function(event){
+    $.ajax({
+      url: 'tickets/' + $('#assigned_ticket_id').val() + '/update',
+      type: 'POST',
+      data:{ assigned_to: $('#ticket_assigned_to').val() },
+      success: function( msg ) {
+        process_tickets_table.ajax.reload(null,false)
+        open_tickets_table.ajax.reload(null,false)
+        count_tickets()
+        $('#modal_assigned_ticket').modal('hide')
+        noty_alert('success', 'Asignacion exitosa')
       }
     })
   })

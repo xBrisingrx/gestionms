@@ -36,19 +36,19 @@
             <ul class="nav nav-tabs md-tabs" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Sin asignar 
-                  <label id="label-sin-asignar" class="badge badge-primary"> <%= @table_open[:total] %> </label>
+                  <label id="label-sin-asignar" class="badge badge-primary"> </label>
                 </a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">En proceso
-                  <label id="label-process" class="badge badge-primary"> <%= @table_process[:total] %> </label>
+                  <label id="label-process" class="badge badge-primary"> </label>
                 </a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Finalizados
-                  <label id="label-closed" class="badge badge-primary"> <%= @table_closed[:total] %> </label>
+                  <label id="label-closed" class="badge badge-primary"> </label>
                 </a>
                 <div class="slide"></div>
               </li>
@@ -75,28 +75,6 @@
 <div class="modal fade" id="modal-ticket" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> </div>
 
 
-
-<!-- Modal -->
-<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input id="ticket_id" type="text">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Guardar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Modal finalizar ticket -->
   <div class="modal fade" id="modal_close_ticket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -113,8 +91,39 @@
         </div>
         <input type="hidden" id="close_ticket_id" name="close_ticket_id" value=""/>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default btn_cerrar" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger btn_cerrar" data-dismiss="modal">Cancelar</button>
           <button type="button" class="btn_destroy_ticket btn btn-primary"> finalizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Modal asignar ticket -->
+  <div class="modal fade" id="modal_assigned_ticket" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          Seleccione a quien desea asignar el ticket
+        </div>
+        <div class="modal-body">
+              <label for="ticket_assigned_to" class="col-sm-1 col-form-label">Persona</label>
+          <div class="row">
+              <div class="col-sm-6">
+                <select class="form-control select-ticket" id="ticket_assigned_to" name="ticket[assigned_to]">
+                  <option disabled="" selected>Seleccione persona</option>
+                    <% @people.each do |p| %>
+                      <option value="<%= p.id %>"> <%= p.name %> <%= p.surname %> </option>
+                    <% end %>
+                </select>
+              </div>
+          </div>
+        </div>
+        <input type="hidden" id="assigned_ticket_id" name="assigned_ticket_id" value=""/>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn_cerrar" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="asignar_ticket" > Asignar </button>
         </div>
       </div>
     </div>

@@ -5,17 +5,19 @@ json.data @open_tickets do |t|
   json.client t.client.name
   if t.assigned
     json.assigned t.assigned.name
+    json.actions ''+
+        if t.ticket_status.status != 'Finalizado'
+                   "<a href='tickets/#{t.id}' class='btn btn-sm btn-info'> <i class='fa fa-comment'></i></a> " +
+                   "<button class='btn btn-sm btn-success close_ticket_btn'"+
+                   "onclick='modal_close_ticket(#{t.id})'> <i class='fa fa-check'></i></button> "
+        else
+                   "<a href='tickets/#{t.id}' class='btn btn-sm btn-primary'> Cerrado </a>"
+        end
   else
     json.assigned ''
+    json.actions "<button class='btn btn-sm btn-success asignar_ticket_btn'"+
+                   "onclick='modal_asignar_ticket(#{t.id})'> <i class='fa fa-user'></i></button> "
   end
 
   json.title t.title
-  json.actions ''+
-    if t.ticket_status.status != 'Finalizado'
-               "<a href='tickets/#{t.id}' class='btn btn-sm btn-info'> <i class='fa fa-comment'></i></a> " +
-               "<button class='btn btn-sm btn-success close_ticket_btn'"+
-               "onclick='modal_close_ticket(#{t.id})'> <i class='fa fa-check'></i></button> "
-    else
-               "<a href='tickets/#{t.id}' class='btn btn-sm btn-primary'> Cerrado </a>"
-    end
 end
