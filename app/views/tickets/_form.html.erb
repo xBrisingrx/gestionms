@@ -15,7 +15,7 @@
       <label for="ticket_assigned_to" class="col-sm-1 col-form-label">Encargado</label>
       <div class="col-sm-6">
         <select class="form-control select-ticket" id="ticket_assigned_to" name="ticket[assigned_to]">
-          <option value="0" selected>Sin encargado</option>
+          <option value="" selected>Sin encargado</option>
             <% @people.each do |p| %>
               <option value="<%= p.id %>"> <%= p.name %> </option>
             <% end %>

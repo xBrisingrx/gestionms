@@ -1,11 +1,35 @@
 class UserMailer < ApplicationMailer
-  default from: "sistemas@maurosampaoli.com.ar"
+  default from: "web@maurosampaoli.com.ar"
   layout 'mailer'
 
-  def welcome_email
+  def ticket_varios
     @ticket = params[:ticket]
-    @url  = 'http://example.com/login'
-    mail(to: 'sistemas@maurosampaoli.com.ar', subject: @ticket.title)
+    mail(to: @ticket.client.email,
+    		 cc: "web@maurosampaoli.com.ar",
+    		 subject: @ticket.title) do |format|
+    		 format.html
+    end
+  end
+
+  def ticket_soporte_tecnico
+    @ticket = params[:ticket]
+
+    mail(to: @ticket.client.email,
+    		 cc: "web@maurosampaoli.com.ar",
+    		 subject: @ticket.title) do |format|
+    		 format.html
+    end
+  end
+
+  def ticket_answer
+    @answer = params[:answer]
+    @ticket = params[:ticket]
+
+    mail(to: @ticket.client.email,
+    		 cc: "web@maurosampaoli.com.ar",
+    		 subject: "Respuesta al ticket Nº " + @ticket.id.to_s) do |format|
+    		 format.html
+    end
   end
 
 end

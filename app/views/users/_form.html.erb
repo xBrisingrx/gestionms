@@ -1,4 +1,4 @@
-<%= form_with(model: @user, remote: true, class: '') do |form| %>
+<%= form_with(model: @user, remote: true, class: '', id: 'form-user') do |form| %>
   <div id="error_explanation" class="alert alert-danger" style="display:none">
     <ul id="error_list"></ul>
   </div>
@@ -32,25 +32,27 @@
   </div>
 
   <div class="form-group row">
-    <label for="client_type_client_id" class="col-sm-3 col-form-label">Cliente</label>
+    <label for="client_id" class="col-sm-3 col-form-label">Cliente</label>
     <div class="col-sm-6">
-      <select class="form-control" id="person_person_type_id" name="person[person_type_id]" class="form-control">
+      <select class="form-control select-person" id="client_id" name="client_id" class="form-control">
         <option disabled selected>Seleccione cliente</option>
         <% @clients.each do |t|  %>
-          <option value="<%= t.id %>"><%= t.name %></option>
+          <% if t.id == @user.id %>
+            <option value="<%= t.id %>"><%= t.name %></option>
+          <% else %>
+            <option value="<%= t.id %>"><%= t.name %></option>  
+          <% end %>
         <% end %>
       </select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="user_person_id_id" class="col-sm-3 col-form-label">Cliente</label>
+    <label for="ticket_person_id" class="col-sm-3 col-form-label">Cliente</label>
     <div class="col-sm-6">
-      <select class="form-control" id="user_person_id" name="user[person_id]" class="form-control">
-        <option disabled selected>Seleccione cliente</option>
-        <% @clients.each do |t|  %>
-          <option value="<%= t.id %>"><%= t.name %></option>
-        <% end %>
+      <select class="form-control select-person" id="ticket_person_id" name="ticket[person_id]" class="form-control">
+        <option disabled selected>Seleccione persona</option>
+        <!-- ajax -->
       </select>
     </div>
   </div>

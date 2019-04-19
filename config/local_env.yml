@@ -1,0 +1,7 @@
+DATABASE: 'gestion_ms'
+DB_USERNAME: 'root'
+DB_PASSWORD: 'asd'
+
+
+MAIL_USERNAME: 'sistemas@maurosampaoli.com.ar'
+MAIL_PASSWORD: 'mauro01David'

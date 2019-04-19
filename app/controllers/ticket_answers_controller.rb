@@ -26,9 +26,9 @@ class TicketAnswersController < ApplicationController
   def create
     @ticket = Ticket.find(params[:ticket_id])
 
-    # if @ticket.state_ticket == 'closed'
-    #   @ticket.update(state_ticket: 'open')
-    # end
+    if @ticket.ticket_status_id == 3
+      @ticket.update(ticket_status_id: 2)
+    end
 
     @answer = @ticket.ticket_answers.create(answer_params)
     @answer.user_id = current_user.id
@@ -36,8 +36,10 @@ class TicketAnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
+        @ticket = Ticket.find(@answer.ticket_id)
+        UserMailer.with(ticket: @ticket, answer: @answer).ticket_answer.deliver_later!
         format.html { redirect_to tickets_path, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
+        # format.json { render json: {status: true}, status: :created, location: @answer }
       else
         format.html { render :new }
         format.json { render json: @answer.errors, status: :unprocessable_entity }

@@ -6,11 +6,10 @@ class TicketsController < ApplicationController
   # parámetro que se le manda a un método, se asume que es un hash, y por eso podés no poner los {}
   # y como es ruby, se pueden omitir los (), y como el => se puede reemplazar por : cuando la key del hash es un simbolo...
 
-  # GET /clients
-  # GET /clients.json
   def index
     @title = 'Tickets'
-    @people = Person.where( client_id: 1 )
+
+    @people = Person.where( client_id: 20 )
     @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table' }
     @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table' }
     @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table' }
@@ -48,7 +47,7 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
-    @people = Person.where(client_id: 1 , active: true )
+    @people = Person.where(client_id: 20 , active: true )
     # @users = User.all
     @clients = Client.all
     respond_to do |format|
@@ -57,29 +56,32 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /clients/1/edit
   def edit
     respond_to do |format|
       format.js
     end
   end
 
-  # POST /clients
-  # POST /clients.json
   def create
     @ticket = Ticket.new(ticket_params)
 
     @ticket.user_id = current_user.id
     
-    if params[:assigned_to].nil?
-      @ticket.ticket_status_id = 2
-    else 
+    if params[:assigned_to] == ""
       @ticket.ticket_status_id = 1
+    else 
+      @ticket.ticket_status_id = 2
     end
 
     respond_to do |format|
       if @ticket.save!
-        UserMailer.with(ticket: @ticket).welcome_email.deliver_later!
+
+        if params[:ticket_type_id] == 1
+          UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+        else 
+          UserMailer.with(ticket: @ticket).ticket_varios.deliver_later!
+        end
+
         format.html { redirect_to tickets_path, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
@@ -89,8 +91,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clients/1
-  # PATCH/PUT /clients/1.json
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
@@ -112,6 +112,7 @@ class TicketsController < ApplicationController
     @answer.user_id = current_user.id
     respond_to do |format|
       if @ticket.update(ticket_status_id: 3) and @answer.save
+        UserMailer.with(ticket: @ticket, answer: @answer).ticket_answer.deliver_later!
         format.json { render json: { status: true }, status: :ok }
       else
         format.json { render json: @answer.errors, status: :unprocessable_entity }
@@ -120,11 +121,13 @@ class TicketsController < ApplicationController
   end
 
   def assign_person
-    
+    respond_to do |format|
+      if @ticket.update(assigned_to: params[:assigned_to], ticket_status_id: 2)
+        format.json { render json: { status: true }, status: :ok }
+      end
+    end
   end
 
-  # DELETE /clients/1
-  # DELETE /clients/1.json
   def destroy
     if @ticket.update(active: false)
       redirect_to tickets_path, notice: 'Ticket dado de baja con éxito.'

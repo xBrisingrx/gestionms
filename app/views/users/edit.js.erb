@@ -1,7 +1,27 @@
 $("#modal-user").html("<%= j (render 'modal_new_user') %>")
 $("#modal-user").modal('show')
 
+
+
 $('.select-person').select2({ width: '100%',theme: "bootstrap4" })
+
+// function populate_people_select()
+// {
+// 	$.ajax({
+// 	  url: '/clients/' + $("#form-user #client_id").val() + '/people',
+// 	  type: 'GET',
+// 	  dataType: 'JSON',
+// 	  success: function ( resp ) {
+// 	    $('#form-user #user_person_id').find('option').remove().end().append('<option value="" disabled selected>Solicito el servicio</option>');
+// 	    $( resp.data ).each(function(i, element){
+// 	    	if (true) {}
+// 	      $("#form-user #ticket_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
+// 	    })
+// 	  }
+// 	})	
+// }
+
+
 
   $("#form-user #client_id").on('change', function(event) {
     $.ajax({
@@ -11,7 +31,6 @@ $('.select-person').select2({ width: '100%',theme: "bootstrap4" })
       success: function ( resp ) {
         $('#form-user #user_person_id').find('option').remove().end().append('<option value="" disabled selected>Solicito el servicio</option>');
         $( resp.data ).each(function(i, element){
-          console.log( element.name )
           $("#form-user #ticket_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
         })
       }
