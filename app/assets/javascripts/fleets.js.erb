@@ -1,0 +1,77 @@
+var computers_table
+var notebooks_table
+var printers_table
+var network_table
+
+function modal_delete(id)
+{
+  $('#modal_delete_client #client_id').val(id)
+  $('#modal_delete_client').modal('show')
+}
+
+jQuery(document).ready(function($) {
+
+  computers_table = $("#computers_table").DataTable({
+    'ajax':'/get_fleet/' + $('#fleets_client_id').val() + '/1',
+    'responsive': true,
+    'columns': [
+    {'data': 'code'},
+    {'data': 'person'},
+    {'data': 'ip_address'},
+    {'data': 'os'},
+    {'data': 'hardware'},
+    {'data': 'software'},
+    {'data': 'actions'}
+    ],
+    'language': { 'url': "/assets/dataTables/Spanish.json"}
+  })
+
+  notebooks_table = $("#notebooks_table").DataTable({
+    'ajax':'/get_fleet/' + $('#fleets_client_id').val() + '/2',
+    'responsive': true,
+    'columns': [
+    {'data': 'code'},
+    {'data': 'person'},
+    {'data': 'model'},
+    {'data': 'os'},
+    {'data': 'hardware'},
+    {'data': 'software'},
+    {'data': 'actions'}
+    ],
+    'language': { 'url': "/assets/dataTables/Spanish.json"}
+  })
+
+  printers_table = $("#printers_table").DataTable({
+    'ajax':'/get_fleet/' + $('#fleets_client_id').val() + '/3',
+    'responsive': true,
+    'columns': [
+    {'data': 'code'},
+    {'data': 'person'},
+    {'data': 'model'},
+    {'data': 'ip_address'},
+    {'data': 'actions'}
+    ],
+    'language': { 'url': "/assets/dataTables/Spanish.json"}
+  })
+
+  network_table = $("#network_table").DataTable({
+    'ajax':'/get_fleet/' + $('#fleets_client_id').val() + '/4',
+    'responsive': true,
+    'columns': [
+    {'data': 'code'},
+    {'data': 'model'},
+    {'data': 'ip_address'},
+    {'data': 'software'},
+    {'data': 'actions'}
+    ],
+    'language': { 'url': "/assets/dataTables/Spanish.json"}
+  })
+
+  $("#form_disable_client").on("ajax:success", function(event) {
+      $("#modal_delete_client").modal('hide')
+      noty_alert('success', 'Cliente eliminado')
+    }).on("ajax:error", function(event) {
+    noty_alert('error', 'No se pudo eliminar al cliente')
+  })
+
+})

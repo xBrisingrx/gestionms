@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_015931) do
+ActiveRecord::Schema.define(version: 2019_04_30_131433) do
 
   create_table "client_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_015931) do
     t.string "location"
     t.string "province"
     t.bigint "phone"
+    t.string "comment", null: false
     t.boolean "active", default: true
     t.bigint "client_type_id"
     t.bigint "iva_condition_id"
@@ -51,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_015931) do
   create_table "fleets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "code"
     t.string "model", limit: 30
-    t.bigint "ip_address"
+    t.string "ip_address"
     t.string "hardware"
     t.string "software", comment: "Software particular que lleve el equipo"
     t.string "os", limit: 20, comment: "Sistema Operativo"
@@ -116,7 +117,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_015931) do
   create_table "ticket_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "ticket_id"
     t.bigint "user_id"
-    t.string "detail"
+    t.string "detail", limit: 500
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -150,7 +151,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_015931) do
 
   create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title", limit: 100
-    t.string "detail"
+    t.string "detail", limit: 500
     t.date "created_date"
     t.bigint "assigned_to", comment: "Persona a cargo de realizar el ticket"
     t.boolean "report", comment: "Discrimina si el ticket va o no al reporte"
@@ -164,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_015931) do
     t.bigint "ticket_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "comment"
     t.index ["assigned_to"], name: "fk_rails_8ff3ec3325"
     t.index ["client_id"], name: "index_tickets_on_client_id"
     t.index ["fleet_id"], name: "index_tickets_on_fleet_id"

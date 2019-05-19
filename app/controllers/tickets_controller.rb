@@ -8,6 +8,7 @@ class TicketsController < ApplicationController
 
   def index
     @title = 'Tickets'
+    @user_rol = current_user.rol.name
 
     @people = Person.where( client_id: 20 )
     @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table' }
@@ -16,20 +17,44 @@ class TicketsController < ApplicationController
 
     # UserMailer.welcome_email.deliver
     respond_to do |format|
-      format.html
-      format.json { render json: Ticket.group(:ticket_status_id).count }
+      if current_user.rol.name == 'Administrador'
+        format.html
+        format.json { render json: Ticket.group(:ticket_status_id).count }
+      else 
+        format.html { render 'client_view' }
+        format.json { render json: Ticket.group(:ticket_status_id).count }
+      end
     end
   end
 
   def get_tickets 
-    @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+    if current_user.rol.name == 'Administrador'
+      @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+    else
+      if params[:ticket_status_id] == '3'
+        @open_tickets = Ticket.where(active: true, ticket_status_id: 3, client_id: current_user.person.client_id )
+      else 
+        @open_tickets = Ticket.where(active: true, client_id: current_user.person.client_id ).where.not( ticket_status_id: 3 )
+      end
+      
+    end
     respond_to do |format|
-      format.json { render :index }
+      if current_user.rol.name == 'Administrador'
+        format.json { render :index }
+      else
+        format.json { render :tickets_client }
+      end
+      
     end
   end
 
   def count_tickets
-    @count_tickets = Ticket.group(:ticket_status_id).count
+    if current_user.rol.name == 'Administrador'
+      @count_tickets = Ticket.group(:ticket_status_id).count
+    else
+      @count_tickets = Ticket.where(client_id: current_user.person.client_id).group(:ticket_status_id).count
+    end
+
     respond_to do |format|
       format.json { render :json => { open: @count_tickets[1] , process: @count_tickets[2], closed: @count_tickets[3]  } }
     end
@@ -51,8 +76,13 @@ class TicketsController < ApplicationController
     # @users = User.all
     @clients = Client.all
     respond_to do |format|
-      format.html
-      format.js
+      if current_user.rol.name == 'Administrador'
+        format.html
+        format.js
+      else 
+        format.html { render 'new_view_client' }
+      end
+
     end
   end
 
@@ -71,6 +101,13 @@ class TicketsController < ApplicationController
       @ticket.ticket_status_id = 1
     else 
       @ticket.ticket_status_id = 2
+    end
+
+    if current_user.rol.name == 'Cliente'
+      @ticket.ticket_type_id = 5
+
+      @ticket.client_id = current_user.person.client_id
+      @ticket.person_id = current_user.person.id
     end
 
     respond_to do |format|
@@ -111,9 +148,14 @@ class TicketsController < ApplicationController
     @answer.detail = params[:detail]
     @answer.user_id = current_user.id
     respond_to do |format|
-      if @ticket.update(ticket_status_id: 3) and @answer.save
-        UserMailer.with(ticket: @ticket, answer: @answer).ticket_answer.deliver_later!
-        format.json { render json: { status: true }, status: :ok }
+      if @answer.save!
+        if @ticket.update(ticket_status_id: 3)
+          UserMailer.with(ticket: @ticket, answer: @answer).ticket_answer.deliver_later!
+          format.json { render 'success', status: :created }
+          format.js
+        else 
+          format.json { render json: @ticket.errors }
+        end
       else
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end

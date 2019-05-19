@@ -1,71 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> <%= @title %> | Sistema MS </title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= favicon_link_tag 'favicon.ico' %>
-    <%= stylesheet_link_tag    'application' %>
-    <%= javascript_include_tag 'application' %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </head>
-
 		<body themebg-pattern="theme1">
-
-			<div class="theme-loader">
-				<div class="loader-track">
-					<div class="preloader-wrapper">
-						<div class="spinner-layer spinner-blue">
-							<div class="circle-clipper left">
-								<div class="circle"></div>
-							</div>
-							<div class="gap-patch">
-								<div class="circle"></div>
-							</div>
-							<div class="circle-clipper right">
-								<div class="circle"></div>
-							</div>
-						</div>
-							<div class="spinner-layer spinner-red">
-								<div class="circle-clipper left">
-									<div class="circle"></div>
-								</div>
-								<div class="gap-patch">
-									<div class="circle"></div>
-								</div>
-								<div class="circle-clipper right">
-									<div class="circle"></div>
-								</div>
-							</div>
-						<div class="spinner-layer spinner-yellow">
-							<div class="circle-clipper left">
-								<div class="circle"></div>
-							</div>
-							<div class="gap-patch">
-								<div class="circle"></div>
-							</div>
-							<div class="circle-clipper right">
-								<div class="circle"></div>
-							</div>
-						</div>
-						<div class="spinner-layer spinner-green">
-							<div class="circle-clipper left">
-								<div class="circle"></div>
-							</div>
-							<div class="gap-patch">
-								<div class="circle"></div>
-							</div>
-							<div class="circle-clipper right">
-								<div class="circle"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
 			<section class="login-block">
 				<div class="container-fluid">
 					<div class="row">
@@ -81,15 +14,8 @@
 											<h3 class="text-center txt-primary">Iniciar sesión</h3>
 											</div>
 										</div>
-										<div class="row m-b-20">
-											<div class="col-md-6">
-												<button class="btn btn-facebook m-b-20 btn-block"><i class="icofont icofont-social-facebook"></i>facebook</button>
-											</div>
-											<div class="col-md-6">
-												<button class="btn btn-twitter m-b-20 btn-block"><i class="icofont icofont-social-twitter"></i>twitter</button>
-											</div>
-										</div>
-										<p class="text-muted text-center p-b-5">Inicio de sesión para ingresar al sistema</p>
+
+										<!-- <p class="text-muted text-center p-b-5">Inicio de sesión para ingresar al sistema</p> -->
 										<div class="form-group form-primary">
 											<input type="text" id="username"  name="username" class="form-control" required="">
 											<span class="form-bar"></span>
@@ -102,11 +28,11 @@
 										</div>
 										<div class="row m-t-30">
 											<div class="col-md-12">
-												<%= submit_tag "LOGIN", class: 'btn btn-primary btn-md btn-block waves-effect text-center m-b-20' %>
+												<%= submit_tag "Iniciar sesión", class: 'btn btn-primary btn-md btn-block waves-effect text-center m-b-20' %>
 												<!-- <button type="button" class="">LOGIN</button> -->
 											</div>
 										</div>
-										<p class="text-inverse text-left">Necesitas una cuenta ?<a href="auth-sign-up-social.html"> <b>Click aqui </b></a>para pedirla.</p>
+										<!-- <p class="text-inverse text-left">Necesitas una cuenta ?<a href="auth-sign-up-social.html"> <b>Click aqui </b></a>para pedirla.</p> -->
 									</div>
 								</div>
 							<% end %>
@@ -114,7 +40,5 @@
 					</div>
 				</div>
 			</section>
-
-    </div>
   </body>
 </html>

@@ -1,19 +1,46 @@
 $("#modal-fleet").html("<%= j (render 'form') %>")
 $("#modal-fleet").modal('show')
 
-$('#fleet_person_id').select2({ width: '90%',theme: "bootstrap4" })
-$('#fleet_os').select2({ width: '90%',theme: "bootstrap4" })
+// $('#fleet_person_id').select2({ width: '90%',theme: "bootstrap4" })
+// $('#fleet_os').select2({ width: '90%',theme: "bootstrap4" }) 
+$('.select-2-fleet').select2({ width: '90%',theme: "bootstrap4" }) 
 
 $("#form-fleet").on("ajax:success", function(event) {
-  console.log('ajax success')
-  new Noty({
-      theme: 'bootstrap-v4',
-      type: 'success ',
-      layout: 'topRight',
-      text: " Alta exitosa ",
-      timeout: ( true, 1000 )
-  }).show()
+  computers_table.ajax.reload(null,false)
+	$('#modal-fleet').modal('hide')
+	
+  noty_alert('success', 'Alta exitosa')
 
 }).on("ajax:error", function(event) {
-  return $("#form-fleet").append("<p>ERROR</p>");
+  noty_alert('error', 'No se pudo cargar la información')
+})
+
+$("#form-fleet-notebook").on("ajax:success", function(event) {
+  notebooks_table.ajax.reload(null,false)
+  $('#modal-fleet').modal('hide')
+
+  noty_alert('success', 'Alta exitosa')  
+
+}).on("ajax:error", function(event) {
+  noty_alert('error', 'No se pudo cargar la información')
+})
+
+$("#form-fleet-network").on("ajax:success", function(event) {
+  network_table.ajax.reload(null,false)
+  $('#modal-fleet').modal('hide')
+
+  noty_alert('success', 'Alta exitosa')  
+
+}).on("ajax:error", function(event) {
+  noty_alert('error', 'No se pudo cargar la información')
+})
+
+$("#form-fleet-printer").on("ajax:success", function(event) {
+  printers_table.ajax.reload(null,false)
+  $('#modal-fleet').modal('hide')
+
+  noty_alert('success', 'Alta exitosa')  
+
+}).on("ajax:error", function(event) {
+  noty_alert('error', 'No se pudo cargar la información')
 })

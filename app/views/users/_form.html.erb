@@ -4,6 +4,17 @@
   </div>
 
   <div class="form-group row">
+    <label for="rol_id" class="col-sm-3 col-form-label">Tipo</label>
+    <div class="col-sm-6">
+      <select class="form-control select-person" id="user_rol_id" name="user[rol_id]" class="form-control">
+        <option disabled selected>Seleccione tipo</option>
+        <option value="1">Administrador</option>
+        <option value="2">Cliente</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
     <%= form.label :username,'Nombre de usuario', class: 'col-sm-3 col-form-label' %>
     <div class="col-9">
       <%= form.text_field :username, class: 'form-control rounded-0' %>
@@ -34,7 +45,7 @@
   <div class="form-group row">
     <label for="client_id" class="col-sm-3 col-form-label">Cliente</label>
     <div class="col-sm-6">
-      <select class="form-control select-person" id="client_id" name="client_id" class="form-control">
+      <select class="form-control select-person" id="user_client_id" name="user[client_id]" class="form-control">
         <option disabled selected>Seleccione cliente</option>
         <% @clients.each do |t|  %>
           <% if t.id == @user.id %>
@@ -48,9 +59,9 @@
   </div>
 
   <div class="form-group row">
-    <label for="ticket_person_id" class="col-sm-3 col-form-label">Cliente</label>
+    <label for="user_person_id" class="col-sm-3 col-form-label">Cliente</label>
     <div class="col-sm-6">
-      <select class="form-control select-person" id="ticket_person_id" name="ticket[person_id]" class="form-control">
+      <select class="form-control select-person" id="user_person_id" name="user[person_id]" class="form-control">
         <option disabled selected>Seleccione persona</option>
         <!-- ajax -->
       </select>

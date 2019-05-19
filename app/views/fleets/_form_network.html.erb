@@ -1,23 +1,11 @@
-<%= form_with(model: [@client, @client.fleets.build], id: 'form-fleet') do |form| %>
+<%= form_with(model: [@client, @client.fleets.build], id: 'form-fleet-network') do |form| %>
 
-  <input type="hidden" name="fleet[fleet_type_id]" id="fleet_fleet_type_id" value="3" >
+  <input type="hidden" name="fleet[fleet_type_id]" id="fleet_fleet_type_id" value="<%= fleet_type %>" >
 
   <div class="form-group row">
     <%= form.label 'Código', class: 'col-3 col-form-label' %>
     <div class="col-9">
       <%= form.text_field :code, class: 'form-control rounded-0' %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="fleet_os" class="col-sm-3 col-form-label">Sistema Operativo</label>
-    <div class="col-sm-6">
-      <select class="form-control" id="fleet_os" name="fleet[os]" class="form-control">
-        <option disabled selected>Seleccione persona que usa</option>
-        <% @operative_system.each do |os|  %>
-          <option value="<%= os %>"><%= os %></option>
-        <% end %>
-      </select>
     </div>
   </div>
 
@@ -29,29 +17,9 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label 'Hardware', class: 'col-3 col-form-label' %>
+    <%= form.label 'IP', class: 'col-3 col-form-label' %>
     <div class="col-9">
-      <%= form.text_field :hardware, class: 'form-control rounded-0' %>
-    </div>
-  </div>
-
-
-  <div class="form-group row">
-    <%= form.label 'Software', class: 'col-3 col-form-label' %>
-    <div class="col-9">
-      <%= form.text_field :software, class: 'form-control rounded-0', placeholder: 'Programas particulares del equipo' %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="fleet_person_id" class="col-sm-3 col-form-label">Usuario</label>
-    <div class="col-sm-6">
-      <select class="form-control" id="fleet_person_id" name="fleet[person_id]" class="form-control">
-        <option disabled selected>Seleccione persona que usa</option>
-        <% @people.each do |p|  %>
-          <option value="<%= p.id %>"><%= p.name %></option>
-        <% end %>
-      </select>
+      <%= form.text_field :ip_address, class: 'form-control rounded-0' %>
     </div>
   </div>
 
@@ -59,4 +27,5 @@
     <%= form.submit 'Guardar', class: 'btn btn-primary' %>
     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
   </div>
+
 <% end %>

@@ -14,11 +14,15 @@
   </head>
 
   <body>
+    <% if logged_in? %>
     <%= render 'layouts/header'%>
     <%= render 'layouts/nav'%>
     <div class="pcoded-content">
       <%= yield %>
     </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </main>
   </body>
 </html>

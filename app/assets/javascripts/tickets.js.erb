@@ -2,16 +2,25 @@ var process_tickets_table
 var closed_tickets_table
 var open_tickets_table
 
+// tablas vistas de clientes
+var closed_tickets_client_table
+var open_tickets_client_table
+
+var form_new_ticket = $('#form-ticket')
+var form_new_ticket_varios = $('#form-ticket-varios')
+
+
 $('.close_ticket_btn').on('click', function(event) {
   // Le asignamos el id del ticket al modal
   console.log('click')
-  $('#close_ticket_id').val( $(this).data('id') )
+  $('#form-close-ticket #ticket_id').val( $(this).data('id') )
   console.log('id: ' + $(this).data('id'))
 })
 
 function modal_close_ticket(id)
 {
-  $('#close_ticket_id').val( id )
+  $('#form-close-ticket #close_message').val('')
+  $('#form-close-ticket #id').val( id )
   $('#modal_close_ticket').modal('show')
 }
 
@@ -23,8 +32,6 @@ function modal_asignar_ticket(id)
 
 
 
-
-
 function count_tickets()
 {
   $.ajax({
@@ -32,42 +39,77 @@ function count_tickets()
     type: 'GET',
     dataType: 'JSON',
     success: function( msg ) {
-      console.log(msg)
+      // console.log(msg)
       $('#label-sin-asignar').text( msg['open'] )
       $('#label-process').text( msg['process'] )
       $('#label-closed').text( msg['closed'] )
+      $('#label-process-client').text( msg['process'] + msg['open'] )
     },
     error: function( msg ) {
-      console.log( msg )
+      // console.log( msg )
     }
   })
 }
+
+
 
 jQuery(document).ready(function($) {
   let btn_show_answer = true
   $('.select-ticket').select2({ width: '100%',theme: "bootstrap4" })
   count_tickets()
-  $('#form-ticket').validate({
-    rules: {
-      'ticket[client_id]': {
-        required: true,
-        // Using the normalizer to trim the value of the element
-        // before validating it.
-        //
-        // The value of `this` inside the `normalizer` is the corresponding
-        // DOMElement. In this example, `this` references the `username` element.
-        normalizer: function(value) {
-          return $.trim(value);
-        }
-      },
-      'ticket[title]': {
-        required: true
-      },
-      'ticket[type_ticket]': {
-        required: true
-      }
+  // $('#form-ticket').validate({
+  //   rules: {
+  //     'ticket[client_id]': {
+  //       required: true,
+  //       // Using the normalizer to trim the value of the element
+  //       // before validating it.
+  //       //
+  //       // The value of `this` inside the `normalizer` is the corresponding
+  //       // DOMElement. In this example, `this` references the `username` element.
+  //       normalizer: function(value) {
+  //         return $.trim(value);
+  //       }
+  //     },
+  //     'ticket[title]': {
+  //       required: true
+  //     },
+  //     'ticket[type_ticket]': {
+  //       required: true
+  //     }
+  //   }
+  // })
+
+form_new_ticket.validate({
+  rules: {
+    'ticket[client_id]': {
+      required: true
+    },
+    'ticket[person_id]': {
+      required: true
+    },
+    'ticket[fleet_id]': {
+      required: true
+    },
+    'ticket[title]': {
+      required: true
     }
-  })
+  }
+})
+
+
+form_new_ticket_varios.validate({
+  rules: {
+    'ticket[client_id]': {
+      required: true
+    },
+    'ticket[person_id]': {
+      required: true
+    },
+    'ticket[title]': {
+      required: true
+    }
+  }
+})
 
 
   $("#form-ticket #ticket_client_id").on('change', function(event) {
@@ -124,28 +166,7 @@ jQuery(document).ready(function($) {
     }
   })
 
-  $('.btn_destroy_ticket').on('click', function(event) {
-    $.ajax({
-      url: 'tickets/' + $('#close_ticket_id').val()+ '/tickets/close_ticket/',
-      type: 'POST',
-      dataType: 'JSON',
-      data: { detail: $('#close_message').val() },
-      success: function (msg){
-        if ( msg ) {
-          process_tickets_table.ajax.reload(null,false)
-          closed_tickets_table.ajax.reload(null,false)
-          $('#modal_close_ticket').modal('hide')
-          count_tickets()
-          noty_alert('success', 'Ticket finalizado con éxito')
-        } else {
-          noty_alert('error', 'Ocurrio un error: no se pudo finalizar el ticket')
-        }
-      },
-      error: function(msg){
-        console.log('error ajax')
-      }
-    })
-  })
+
 
   $('#asignar_ticket').on('click',function(event){
     $.ajax({
@@ -168,33 +189,62 @@ jQuery(document).ready(function($) {
                           'ajax':'tickets/get_tickets/2',
                           'responsive' : true,
                           'columns': [
+                          {'data': 'id'},
                           {'data': 'date'},
                           {'data': 'type'},
                           {'data': 'client'},
                           {'data': 'assigned'},
                           {'data': 'title'},
-                          {'data': 'actions'} ] })
+                          {'data': 'actions'} ],
+                          'language': { 'url': "/assets/dataTables/Spanish.json"} 
+                        })
 
     closed_tickets_table = $('#closed_tickets_table').DataTable({
                           'ajax':'tickets/get_tickets/3',
                           'responsive' : true,
                           'columns': [
+                          {'data': 'id'},
                           {'data': 'date'},
                           {'data': 'type'},
                           {'data': 'client'},
                           {'data': 'assigned'},
                           {'data': 'title'},
-                          {'data': 'actions'} ] })
+                          {'data': 'actions'} ],
+                          'language': { 'url': "/assets/dataTables/Spanish.json"} 
+                        })
 
     open_tickets_table = $('#open_tickets_table').DataTable({
                           'ajax':'tickets/get_tickets/1',
                           'responsive' : true,
                           'columns': [
+                          {'data': 'id'},
                           {'data': 'date'},
                           {'data': 'type'},
                           {'data': 'client'},
                           {'data': 'assigned'},
                           {'data': 'title'},
-                          {'data': 'actions'} ] })
+                          {'data': 'actions'} ],
+                          'language': { 'url': "/assets/dataTables/Spanish.json"} 
+                        })
+
+    closed_tickets_client_table = $('#closed_tickets_client_table').DataTable({
+                          'ajax':'tickets/get_tickets/3',
+                          'responsive' : true,
+                          'columns': [
+                          {'data': 'date'},
+                          {'data': 'title'},
+                          {'data': 'actions'} ],
+                          'language': { 'url': "/assets/dataTables/Spanish.json"} 
+                        })
+
+    open_tickets_client_table = $('#process_tickets_client_table').DataTable({
+                          'ajax':'tickets/get_tickets/1',
+                          'responsive' : true,
+                          'columns': [
+                          {'data': 'date'},
+                          {'data': 'title'},
+                          {'data': 'actions'} ],
+                          'language': { 'url': "/assets/dataTables/Spanish.json"} 
+                        })
 
 }) // End JQuery

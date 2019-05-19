@@ -3,7 +3,7 @@ $("#modal-user").modal('show')
 
 $('.select-person').select2({ width: '100%',theme: "bootstrap4" })
 
-  $("#form-user #client_id").on('change', function(event) {
+  $("#form-user #user_client_id").on('change', function(event) {
     $.ajax({
       url: '/clients/' + $(this).val() + '/people',
       type: 'GET',
@@ -12,7 +12,7 @@ $('.select-person').select2({ width: '100%',theme: "bootstrap4" })
         $('#form-user #user_person_id').find('option').remove().end().append('<option value="" disabled selected>Solicito el servicio</option>');
         $( resp.data ).each(function(i, element){
           console.log( element.name )
-          $("#form-user #ticket_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
+          $("#form-user #user_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
         })
       }
     })

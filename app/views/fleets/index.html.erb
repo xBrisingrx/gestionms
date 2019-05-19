@@ -39,34 +39,34 @@
           <div class="card-block">
             <ul class="nav nav-tabs md-tabs" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">PC Escritorio</a>
+                <a class="nav-link active" data-toggle="tab" href="#desktop_list" role="tab">PC Escritorio</a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">Notebooks</a>
+                <a class="nav-link" data-toggle="tab" href="#notebooks_list" role="tab">Notebooks</a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Impresoras</a>
+                <a class="nav-link" data-toggle="tab" href="#printers_list" role="tab">Impresoras</a>
                 <div class="slide"></div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#finalizados" role="tab">Red</a>
+                <a class="nav-link" data-toggle="tab" href="#network_list" role="tab">Red</a>
                 <div class="slide"></div>
               </li>
             </ul>
 
             <div class="tab-content card-block">
-              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
+              <div class="tab-pane active" id="desktop_list" role="tabpanel">
                 <%= render('table_computers', table: @computers)%>
               </div>
-              <div class="tab-pane" id="finalizados" role="tabpanel">
+              <div class="tab-pane" id="notebooks_list" role="tabpanel">
                 <%= render('table_notebooks', table: @notebooks)%>
               </div>
-              <div class="tab-pane" id="proceso" role="tabpanel">
+              <div class="tab-pane" id="printers_list" role="tabpanel">
                 <%= render('table_printers', table: @printers)%>
               </div>
-              <div class="tab-pane" id="finalizados" role="tabpanel">
+              <div class="tab-pane" id="network_list" role="tabpanel">
                 <%= render('table_network', table: @network)%>
               </div>
             </div>
@@ -105,3 +105,6 @@
     </div>
   </div>
 </div>
+
+  <!-- Lo uso para conservar el id del cliente -->
+<input type="hidden" id="fleets_client_id" name="fleets_client_id" value='<%= @client.id %>' >

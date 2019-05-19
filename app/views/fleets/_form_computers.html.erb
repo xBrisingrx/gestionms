@@ -12,7 +12,7 @@
   <div class="form-group row">
     <label for="fleet_os" class="col-sm-3 col-form-label">Sistema Operativo</label>
     <div class="col-sm-6">
-      <select class="form-control" id="fleet_os" name="fleet[os]" class="form-control">
+      <select id="fleet_os" name="fleet[os]" class="form-control select-2-fleet">
         <option disabled selected>Seleccione persona que usa</option>
         <% @operative_system.each do |os|  %>
           <option value="<%= os %>"><%= os %></option>
@@ -46,7 +46,7 @@
   <div class="form-group row">
     <label for="fleet_person_id" class="col-sm-3 col-form-label">Usuario</label>
     <div class="col-sm-6">
-      <select class="form-control" id="fleet_person_id" name="fleet[person_id]" class="form-control">
+      <select class="form-control select-2-fleet" id="fleet_person_id" name="fleet[person_id]">
         <option disabled selected>Seleccione persona que usa</option>
         <% @people.each do |p|  %>
           <option value="<%= p.id %>"><%= p.name %></option>

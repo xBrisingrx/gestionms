@@ -5,7 +5,6 @@
         <i class="ti-headphone-alt bg-c-blue"></i>
         <div class="d-inline">
           <h5>Tickets registrados</h5>
-        <span>Descripcion de la vista</span>
         </div>
       </div>
     </div>
@@ -35,14 +34,8 @@
           <div class="card-block">
             <ul class="nav nav-tabs md-tabs" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Sin asignar 
-                  <label id="label-sin-asignar" class="badge badge-primary"> </label>
-                </a>
-                <div class="slide"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">En proceso
-                  <label id="label-process" class="badge badge-primary"> </label>
+                <a class="nav-link active" data-toggle="tab" href="#proceso" role="tab">En proceso
+                  <label id="label-process-client" class="badge badge-primary"> </label>
                 </a>
                 <div class="slide"></div>
               </li>
@@ -55,14 +48,11 @@
             </ul>
 
             <div class="tab-content card-block">
-              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
-                <%= render('table_tickets', table: @table_open)%>
-              </div>
-              <div class="tab-pane" id="proceso" role="tabpanel">
-                <%= render('table_tickets', table: @table_process)%>
+              <div class="tab-pane active" id="proceso" role="tabpanel">
+                <%= render('table_tickets_client', table_id: 'process_tickets_client_table')%>
               </div>
               <div class="tab-pane" id="finalizados" role="tabpanel">
-                <%= render('table_tickets', table: @table_closed)%>
+                <%= render('table_tickets_client', table_id: 'closed_tickets_client_table')%>
               </div>
             </div>
           </div>
@@ -99,33 +89,4 @@
     </div>
   </div>
 
-
-
-<!-- Modal asignar ticket -->
-  <div class="modal fade" id="modal_assigned_ticket" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          Seleccione a quien desea asignar el ticket
-        </div>
-        <div class="modal-body">
-              <label for="ticket_assigned_to" class="col-sm-1 col-form-label">Persona</label>
-          <div class="row">
-              <div class="col-sm-6">
-                <select class="form-control select-ticket" id="ticket_assigned_to" name="ticket[assigned_to]">
-                  <option disabled="" selected>Seleccione persona</option>
-                    <% @people.each do |p| %>
-                      <option value="<%= p.id %>"> <%= p.name %> <%= p.surname %> </option>
-                    <% end %>
-                </select>
-              </div>
-          </div>
-        </div>
-        <input type="hidden" id="assigned_ticket_id" name="assigned_ticket_id" value=""/>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger btn_cerrar" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="asignar_ticket" > Asignar </button>
-        </div>
-      </div>
-    </div>
-  </div>
+<input type="hidden" name="user_client_id" id="user_client_id" value="<%= @current_user.person.client_id %>" >

@@ -6,6 +6,10 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  #config zona horaria
+  config.time_zone = 'Buenos Aires'
+  config.active_record.default_timezone = :utc
+
   # Do not eager load code on boot.
   config.eager_load = false
 

@@ -1,4 +1,5 @@
 json.data @open_tickets do |t|
+  json.id t.id
   json.user t.user
   json.date t.created_at.strftime("%d-%m-%Y")
   json.type t.ticket_type.name

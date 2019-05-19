@@ -38,6 +38,8 @@ function delete_user()
 }
 
 jQuery(document).ready(function($) {
+  $('.select-users').select2({ width: '100%',theme: "bootstrap4" })
+
   users_table = $("#users_table").DataTable({
     'ajax':'users',
     'responsive' : true,

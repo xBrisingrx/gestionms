@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
   skip_before_action :no_login
-  layout false
+  # layout false
   
   def new
     if logged_in?
       redirect_to root_path
+    else
+      respond_to do |format|
+        format.html
+      end
     end
   end
 

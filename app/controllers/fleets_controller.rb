@@ -5,6 +5,7 @@ class FleetsController < ApplicationController
   # GET /fleets.json
   def index
     @client = Client.find(params[:client_id])
+    @title = 'Equipos de ' + @client.name
     @fleets = Fleet.where(client_id: params[:client_id], active: true)
     @computers = { title: 'PC de escritorio', id: 'table_computers', 
                    cols: ['Código', 'IP', 'Hardware', 'Software', 'Encargado', 'Acciones'] }
@@ -24,6 +25,14 @@ class FleetsController < ApplicationController
   # GET /fleets/1
   # GET /fleets/1.json
   def show
+  end
+
+  def get_fleet
+    # Obtengo la flota por cliente y tipo , es para agregarlos a la tabla
+    @fleets = Fleet.where(client_id: params[:client_id], fleet_type_id: params[:fleet_type_id], active: true)
+    respond_to do |format|
+      format.json
+    end
   end
 
   # GET /fleets/new
@@ -50,7 +59,7 @@ class FleetsController < ApplicationController
     @fleet = @client.fleets.create(fleet_params)
 
     respond_to do |format|
-      if @fleet.save
+      if @fleet.save!
         format.html { redirect_to client_fleets_path(@client), notice: 'Fleet was successfully created.' }
         format.json { render 'success', status: :created, location: @fleet }
         format.js

@@ -5,7 +5,6 @@
         <i class="ti-headphone-alt bg-c-blue"></i>
         <div class="d-inline">
           <h5>Tickets registrados</h5>
-        <span>Descripcion de la vista</span>
         </div>
       </div>
     </div>
@@ -35,28 +34,29 @@
           <div class="card-header">
           </div>
           <div class="card-block">
-            <ul class="nav nav-tabs md-tabs" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Varios</a>
-                <div class="slide"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">Soporte técnico/Remoto</a>
-                <div class="slide"></div>
-              </li>
-            </ul>
+            <%= form_for @ticket, :html => { id: 'form-ticket-varios-client'} do |form| %>
+              
+              <input type="hidden"  id="ticket_assigned_to" name="ticket[assigned_to]" value="">
 
-            <div class="tab-content card-block">
-              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
-                <%= render('form_varios', ticket: @ticket, ticket_type: 1 )%>
+              <div class="form-group row">
+                <%= form.label :title, 'Asunto (*)', class: 'col-sm-1 col-form-label', required: true %>
+                <div class="col-sm-6">
+                  <%= form.text_field :title, class:'form-control'%>
+                </div>
               </div>
-              <div class="tab-pane" id="proceso" role="tabpanel">
-                <%= render('form', ticket: @ticket, ticket_type: 2 )%>
+
+              <div class="form-group row">
+                <%= form.label :detail, 'Motivo ', class: 'col-sm-1 col-form-label'  %><br>
+                <div class="col-sm-9">
+                  <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0', placeholder: 'Descripción'%>
+                </div>
               </div>
-              <div class="tab-pane" id="finalizados" role="tabpanel">
-                <%= render('form', ticket: @ticket, ticket_type: 3 )%>
+
+              <div class="actions">
+                <%= form.submit 'Agregar', class: 'btn btn-primary' %>
+                <%= link_to 'Cancelar', tickets_path, class: 'btn btn-danger' %>
               </div>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -67,6 +67,5 @@
 
 
 <script type="text/javascript">
-  form_new_ticket = $('#form-ticket')
-  form_new_ticket_varios = $('#form-ticket-varios')
+  form_new_ticket_varios_client = $('#form-ticket-varios-client')
 </script>

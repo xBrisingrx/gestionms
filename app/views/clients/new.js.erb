@@ -34,7 +34,7 @@ form_new_client.validate({
 
 $("#form-client").on("ajax:success", function(event) {
     clients_table.ajax.reload(null,false)
-    noty_alert('success', 'Opreacion exitosa')
+    noty_alert('success', 'Operacion exitosa')
     $("#modal-client").modal('hide')
   }).on("ajax:error", function(event) {
   // $('#form-client #error_list').empty().delay( 8000 )
