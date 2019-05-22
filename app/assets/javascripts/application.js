@@ -9,7 +9,7 @@
 //= template/bootstrap.min
 //= template/waves.min
 //= template/jquery.slimscroll
-//= template/modernizr
+//= require template/modernizr
 //= template/css-scrollbars.min
 
 //= template/vertical-layout.min

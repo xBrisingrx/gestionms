@@ -5,7 +5,7 @@ class CreateTickets < ActiveRecord::Migration[5.2]
       t.string :detail
       t.date :created_date
       t.integer :assigned_to, limit: 8 , comment: 'Persona a cargo de realizar el ticket'
-      t.boolean :report, comment: 'Discrimina si el ticket va o no al reporte'
+      t.boolean :report, comment: 'Discrimina si el ticket va o no al reporte', default: false
       t.boolean :active, :default => true
       t.references :client, foreign_key: true
       t.references :fleet, foreign_key: true

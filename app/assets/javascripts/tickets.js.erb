@@ -20,6 +20,7 @@ $('.close_ticket_btn').on('click', function(event) {
 function modal_close_ticket(id)
 {
   $('#form-close-ticket #close_message').val('')
+  $('#form-close-ticket #detail').val('')
   $('#form-close-ticket #id').val( id )
   $('#modal_close_ticket').modal('show')
 }
@@ -239,7 +240,7 @@ form_new_ticket_varios.validate({
 
     open_tickets_client_table = $('#process_tickets_client_table').DataTable({
                           'ajax':'tickets/get_tickets/1',
-                          'responsive' : true,
+                          'responsive' : false,
                           'columns': [
                           {'data': 'date'},
                           {'data': 'title'},

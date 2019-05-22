@@ -116,7 +116,7 @@ class TicketsController < ApplicationController
         if params[:ticket_type_id] == 1
           UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
         else 
-          UserMailer.with(ticket: @ticket).ticket_varios.deliver_later!
+          UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
         end
 
         format.html { redirect_to tickets_path, notice: 'Ticket was successfully created.' }

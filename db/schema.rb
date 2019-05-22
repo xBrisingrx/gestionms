@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_30_131433) do
+ActiveRecord::Schema.define(version: 2019_05_21_035219) do
 
   create_table "client_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_04_30_131433) do
     t.bigint "person_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "send_email", default: false
     t.index ["client_id"], name: "index_people_on_client_id"
     t.index ["person_type_id"], name: "index_people_on_person_type_id"
   end
