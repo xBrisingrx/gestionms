@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_035219) do
+ActiveRecord::Schema.define(version: 2019_05_24_033537) do
 
   create_table "client_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2019_05_21_035219) do
     t.string "detail", limit: 500
     t.date "created_date"
     t.bigint "assigned_to", comment: "Persona a cargo de realizar el ticket"
-    t.boolean "report", comment: "Discrimina si el ticket va o no al reporte"
+    t.boolean "report", default: false, comment: "Discrimina si el ticket va o no al reporte"
     t.boolean "active", default: true
     t.bigint "client_id"
     t.bigint "fleet_id"
@@ -166,7 +166,6 @@ ActiveRecord::Schema.define(version: 2019_05_21_035219) do
     t.bigint "ticket_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "comment"
     t.index ["assigned_to"], name: "fk_rails_8ff3ec3325"
     t.index ["client_id"], name: "index_tickets_on_client_id"
     t.index ["fleet_id"], name: "index_tickets_on_fleet_id"
