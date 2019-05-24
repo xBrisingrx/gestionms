@@ -96,7 +96,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
 
     @ticket.user_id = current_user.id
-    
+    @ticket.comment = ''
     if params[:assigned_to] == ""
       @ticket.ticket_status_id = 1
     else 
