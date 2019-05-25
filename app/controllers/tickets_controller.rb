@@ -15,7 +15,6 @@ class TicketsController < ApplicationController
     @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table' }
     @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table' }
 
-    # UserMailer.welcome_email.deliver
     respond_to do |format|
       if current_user.rol.name == 'Administrador'
         format.html
@@ -125,6 +124,21 @@ class TicketsController < ApplicationController
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def emails_list
+    # En caso de que el IT suba el ticket, si el ticket hay que reportarlo al cliente se le envia al cliente y a los referentes de la empresa
+    # En caso de que lo suba el cliente va a el y a referentes Y hay que checkar que no se repitan mails ( de usuario y referente )
+    @data = Ticket.where(id: 741)
+    if current_user.rol.name == 'Administrador'
+      @list = Person.select(:email).where(client_id: data.client.id, person_type_id: 2)
+    else
+      @list = Person.select(:email).where(client_id: data.client.id, person_type_id: 2).where.not(email: current_user.email)
+    end
+
+    respond_to do |format|
+      format.json { @list }
     end
   end
 
