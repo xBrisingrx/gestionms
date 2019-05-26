@@ -11,7 +11,6 @@ class TicketsController < ApplicationController
     @user_rol = current_user.rol.name
 
     @people = Person.where( client_id: 20 )
-    @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table' }
     @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table' }
     @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table' }
 
@@ -28,7 +27,11 @@ class TicketsController < ApplicationController
 
   def get_tickets 
     if current_user.rol.name == 'Administrador'
-      @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+      if params[:ticket_status_id] == '3'
+        @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+      else
+        @open_tickets = Ticket.where(active: true).where.not( ticket_status_id: 3 )
+      end
     else
       if params[:ticket_status_id] == '3'
         @open_tickets = Ticket.where(active: true, ticket_status_id: 3, client_id: current_user.person.client_id )
