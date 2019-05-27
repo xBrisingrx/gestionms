@@ -11,11 +11,9 @@ class TicketsController < ApplicationController
     @user_rol = current_user.rol.name
 
     @people = Person.where( client_id: 20 )
-    @table_open = { title: 'Tickets sin asignar', id: 'open_tickets_table' }
     @table_process = { title: 'Tickets en proceso', id: 'process_tickets_table' }
     @table_closed = { title: 'Tickets finalizados', id: 'closed_tickets_table' }
 
-    # UserMailer.welcome_email.deliver
     respond_to do |format|
       if current_user.rol.name == 'Administrador'
         format.html
@@ -29,7 +27,11 @@ class TicketsController < ApplicationController
 
   def get_tickets 
     if current_user.rol.name == 'Administrador'
-      @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+      if params[:ticket_status_id] == '3'
+        @open_tickets = Ticket.where(active: true, ticket_status_id: params[:ticket_status_id] )
+      else
+        @open_tickets = Ticket.where(active: true).where.not( ticket_status_id: 3 )
+      end
     else
       if params[:ticket_status_id] == '3'
         @open_tickets = Ticket.where(active: true, ticket_status_id: 3, client_id: current_user.person.client_id )
@@ -125,6 +127,21 @@ class TicketsController < ApplicationController
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def emails_list
+    # En caso de que el IT suba el ticket, si el ticket hay que reportarlo al cliente se le envia al cliente y a los referentes de la empresa
+    # En caso de que lo suba el cliente va a el y a referentes Y hay que checkar que no se repitan mails ( de usuario y referente )
+    @data = Ticket.where(id: 741)
+    if current_user.rol.name == 'Administrador'
+      @list = Person.select(:email).where(client_id: data.client.id, person_type_id: 2)
+    else
+      @list = Person.select(:email).where(client_id: data.client.id, person_type_id: 2).where.not(email: current_user.email)
+    end
+
+    respond_to do |format|
+      format.json { @list }
     end
   end
 

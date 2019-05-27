@@ -35,13 +35,7 @@
           <div class="card-block">
             <ul class="nav nav-tabs md-tabs" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#sin_asignar" role="tab">Sin asignar 
-                  <label id="label-sin-asignar" class="badge badge-primary"> </label>
-                </a>
-                <div class="slide"></div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#proceso" role="tab">En proceso
+                <a class="nav-link active" data-toggle="tab" href="#proceso" role="tab">En proceso
                   <label id="label-process" class="badge badge-primary"> </label>
                 </a>
                 <div class="slide"></div>
@@ -55,10 +49,7 @@
             </ul>
 
             <div class="tab-content card-block">
-              <div class="tab-pane active" id="sin_asignar" role="tabpanel">
-                <%= render('table_tickets', table: @table_open)%>
-              </div>
-              <div class="tab-pane" id="proceso" role="tabpanel">
+              <div class="tab-pane active" id="proceso" role="tabpanel">
                 <%= render('table_tickets', table: @table_process)%>
               </div>
               <div class="tab-pane" id="finalizados" role="tabpanel">
