@@ -34,10 +34,18 @@ class TicketAnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.active = true
 
+    if @ticket.report
+      # Los tickets de los clientes siempre tienen report true
+      @email = Person.where(client_id: @ticket.client_id , person_type_id: 2 ).where.not(id: current_user.person_id).pluck(:email)
+      if current_user.rol.name == 'Cliente'
+        @email.insert(0, current_user.email)
+      end 
+    end
+
     respond_to do |format|
       if @answer.save
         @ticket = Ticket.find(@answer.ticket_id)
-        UserMailer.with(ticket: @ticket, answer: @answer).ticket_answer.deliver_later!
+        UserMailer.with(ticket: @ticket, answer: @answer, email: @email).ticket_answer.deliver_later!
         format.html { redirect_to tickets_path, notice: 'Answer was successfully created.' }
         # format.json { render json: {status: true}, status: :created, location: @answer }
       else

@@ -5,7 +5,7 @@
 //= require jquery3
 //= require jquery-migrate.min
 //= require template/jquery-ui.min
-// template/popper.min
+//= require template/popper.min
 //= require template/bootstrap.min
 //= require template/waves.min
 //= require template/jquery.slimscroll

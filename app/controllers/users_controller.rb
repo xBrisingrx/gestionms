@@ -35,12 +35,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    # Buscamos a la persona para actualizarle el tipo persona a referente
-    @person = Person.where(id: params[:person_id])
 
     respond_to do |format|
       if @user.save!
-        @person.update( person_type_id: 2 )
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
         format.js

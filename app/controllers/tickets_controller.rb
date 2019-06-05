@@ -62,6 +62,14 @@ class TicketsController < ApplicationController
     end
   end
 
+  def get_emails ticket
+    if ticket.user.rol == 'Administrador' and ticket.report
+      @emails = Person.select( :email ).where( client_id: ticket.client.id, person_type_id: 2 ) 
+    else
+      @emails = Person.select( :email ).where( client_id: ticket.client.id, person_type_id: 2 ) 
+    end
+  end
+
   def show
     @title = 'Ver ticket'
     @ticket_create = Ticket.find(params[:id])
@@ -110,15 +118,32 @@ class TicketsController < ApplicationController
 
       @ticket.client_id = current_user.person.client_id
       @ticket.person_id = current_user.person.id
+      @ticket.report = true
     end
+
+    if @ticket.report
+      # Los tickets de los clientes siempre tienen report true
+      @email = Person.where(client_id: @ticket.client_id , person_type_id: 2 ).where.not(id: current_user.person_id).pluck(:email)
+      if current_user.rol.name == 'Cliente'
+        @email.insert(0, current_user.email)
+      end 
+    end
+      
 
     respond_to do |format|
       if @ticket.save!
-
         if params[:ticket_type_id] == 1
-          UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+          if @ticket.report
+            UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+          else
+            UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+          end
         else 
-          UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
+          if @ticket.report
+            UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name, email: @email).ticket_varios.deliver_later!
+          else
+            UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
+          end
         end
 
         format.html { redirect_to tickets_path, notice: 'Ticket was successfully created.' }
@@ -130,20 +155,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  def emails_list
-    # En caso de que el IT suba el ticket, si el ticket hay que reportarlo al cliente se le envia al cliente y a los referentes de la empresa
-    # En caso de que lo suba el cliente va a el y a referentes Y hay que checkar que no se repitan mails ( de usuario y referente )
-    @data = Ticket.where(id: 741)
-    if current_user.rol.name == 'Administrador'
-      @list = Person.select(:email).where(client_id: data.client.id, person_type_id: 2)
-    else
-      @list = Person.select(:email).where(client_id: data.client.id, person_type_id: 2).where.not(email: current_user.email)
-    end
-
-    respond_to do |format|
-      format.json { @list }
-    end
-  end
 
   def update
     respond_to do |format|
@@ -164,10 +175,19 @@ class TicketsController < ApplicationController
     @answer.ticket_id = params[:id]
     @answer.detail = params[:detail]
     @answer.user_id = current_user.id
+
+    if @ticket.report
+      # Los tickets de los clientes siempre tienen report true
+      @email = Person.where(client_id: @ticket.client_id , person_type_id: 2 ).where.not(id: current_user.person_id).pluck(:email)
+      if current_user.rol.name == 'Cliente'
+        @email.insert(0, current_user.email)
+      end 
+    end
+
     respond_to do |format|
       if @answer.save!
         if @ticket.update(ticket_status_id: 3)
-          UserMailer.with(ticket: @ticket, answer: @answer).ticket_answer.deliver_later!
+          UserMailer.with(ticket: @ticket, answer: @answer, email: @email).ticket_answer.deliver_later!
           format.json { render 'success', status: :created }
           format.js
         else 
