@@ -1,7 +1,9 @@
 DATABASE: 'gestion_ms'
-DB_USERNAME: 'root'
-DB_PASSWORD: 'asd'
+DB_USERNAME: 'david'
+DB_PASSWORD: 'mauro01David'
 
 
 MAIL_USERNAME: 'sistemas@maurosampaoli.com.ar'
 MAIL_PASSWORD: 'mauro01David'
+
+SECRET_KEY_BASE: 'be99328559eb5320b7d2725993336adb4a026053d394a22f982a006c83ee768a8ab7f3aaaacf99d28237cfffe18a811f61ac20883088a3295efc4485f7f193fd'

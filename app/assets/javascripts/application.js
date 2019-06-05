@@ -2,7 +2,7 @@
 
 
 
-//= require jquery3
+//jquery3
 //= require jquery-migrate.min
 //= require template/jquery-ui.min
 // template/popper.min
