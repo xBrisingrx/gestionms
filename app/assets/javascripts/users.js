@@ -49,7 +49,8 @@ jQuery(document).ready(function($) {
     {'data': 'client_name'},
     {'data': 'person_name'},
     {'data': 'actions'}
-    ]
+    ],
+    'language': { 'url': "/assets/dataTables/Spanish.json"} 
   })
 
 

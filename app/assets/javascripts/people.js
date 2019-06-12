@@ -55,7 +55,8 @@ jQuery(document).ready(function($) {
       {'data': 'email' },
       {'data': 'phone' },
       {'data': 'actions' }
-    ]
+    ],
+    'language': { 'url': "/assets/dataTables/Spanish.json"} 
   })
 
 }) // End JQuery document ready
