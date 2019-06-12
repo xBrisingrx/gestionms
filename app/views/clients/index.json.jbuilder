@@ -5,27 +5,9 @@ json.data @clients do |c|
   json.cuit c.cuit
   json.email c.email
   json.direction c.direction
-  json.actions "<div class='btn-group btn-sm' role='group' >
-                <button id='btn-employee' type='button' class='btn btn-secondary dropdown-toggle waves-effect waves-light btn-sm' 
-                        data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                  <i class='fa fa-users' aria-hidden='true'></i>
-                </button>
-                <div class='dropdown-menu' aria-labelledby='btn-employee' >
-                  <a class='dropdown-item' href='/clients/#{c.id}/people'>  Ver </a>
-                    <a data-toggle='modal' data-target='#modal-client' class='dropdown-item' data-remote='true'
-                        href='/clients/#{c.id}/people/new'>Agregar</a>
-                </div>
-
-                <button id='btn-computers' type='button' class='btn btn-secondary dropdown-toggle waves-effect waves-light btn-sm ml-1' 
-                        data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                  <i class='fa fa-desktop' aria-hidden='true'></i>
-                </button>
-                <div class='dropdown-menu' aria-labelledby='btn-computers' >
-                  <a class='dropdown-item' href='/clients/#{c.id}/fleets'>  Ver </a>
-                    <a data-toggle='modal' data-target='#modal-client' class='dropdown-item' data-remote='true'
-                       href='/clients/#{c.id}/fleets/new'>Agregar</a>
-                </div>
-
+  json.actions "
+               <a class='btn btn-success ml-1 btn-sm' href='/clients/#{c.id}/people'>  <i class='fa fa-users' aria-hidden='true'></i> </a>
+               <a class='btn btn-danger ml-1 btn-sm' href='/clients/#{c.id}/fleets'>  <i class='fa fa-desktop' aria-hidden='true'></i> </a>
                 <a id='btn_client_edit' data-toggle='modal' data-target='#modal-client' class='btn btn-warning ml-1 btn-sm'
                      data-remote='true' href='/clients/#{c.id}/edit'><i class='fa fa-edit' aria-hidden='true'></i>
                 </a>

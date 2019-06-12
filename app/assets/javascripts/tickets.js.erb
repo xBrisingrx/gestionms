@@ -40,7 +40,6 @@ function count_tickets()
     type: 'GET',
     dataType: 'JSON',
     success: function( msg ) {
-      // console.log(msg)
       $('#label-sin-asignar').text( msg['open'] )
       $('#label-process').text( msg['process'] )
       $('#label-closed').text( msg['closed'] )
@@ -58,59 +57,38 @@ jQuery(document).ready(function($) {
   let btn_show_answer = true
   $('.select-ticket').select2({ width: '100%',theme: "bootstrap4" })
   count_tickets()
-  // $('#form-ticket').validate({
-  //   rules: {
-  //     'ticket[client_id]': {
-  //       required: true,
-  //       // Using the normalizer to trim the value of the element
-  //       // before validating it.
-  //       //
-  //       // The value of `this` inside the `normalizer` is the corresponding
-  //       // DOMElement. In this example, `this` references the `username` element.
-  //       normalizer: function(value) {
-  //         return $.trim(value);
-  //       }
-  //     },
-  //     'ticket[title]': {
-  //       required: true
-  //     },
-  //     'ticket[type_ticket]': {
-  //       required: true
-  //     }
-  //   }
-  // })
 
-form_new_ticket.validate({
-  rules: {
-    'ticket[client_id]': {
-      required: true
-    },
-    'ticket[person_id]': {
-      required: true
-    },
-    'ticket[fleet_id]': {
-      required: true
-    },
-    'ticket[title]': {
-      required: true
+  form_new_ticket.validate({
+    rules: {
+      'ticket[client_id]': {
+        required: true
+      },
+      'ticket[person_id]': {
+        required: true
+      },
+      'ticket[fleet_id]': {
+        required: true
+      },
+      'ticket[title]': {
+        required: true
+      }
     }
-  }
-})
+  })
 
 
-form_new_ticket_varios.validate({
-  rules: {
-    'ticket[client_id]': {
-      required: true
-    },
-    'ticket[person_id]': {
-      required: true
-    },
-    'ticket[title]': {
-      required: true
+  form_new_ticket_varios.validate({
+    rules: {
+      'ticket[client_id]': {
+        required: true
+      },
+      'ticket[person_id]': {
+        required: true
+      },
+      'ticket[title]': {
+        required: true
+      }
     }
-  }
-})
+  })
 
 
   $("#form-ticket #ticket_client_id").on('change', function(event) {
@@ -194,9 +172,18 @@ form_new_ticket_varios.validate({
                           {'data': 'id'},
                           {'data': 'date'},
                           {'data': 'title'},
-                          {'data': 'type'},
                           {'data': 'client'},
+                          {'data': 'type'},
                           {'data': 'assigned'} ],
+                          "columnDefs": [
+                            { 'width': '20%', 'targets': 0 },
+                            { 'width': '5%', 'targets': 1 },
+                            { 'width': '10%', 'targets': 2 },
+                            { 'width': '30%', 'targets': 3 },
+                            { 'width': '10%', 'targets': 4 },
+                            { 'width': '15%', 'targets': 5 },
+                            { 'width': '10%', 'targets': 6 }
+                          ],
                           'language': { 'url': "/assets/dataTables/Spanish.json"} 
                         })
 
@@ -208,8 +195,8 @@ form_new_ticket_varios.validate({
                           {'data': 'id'},
                           {'data': 'date'},
                           {'data': 'title'},
-                          {'data': 'type'},
                           {'data': 'client'},
+                          {'data': 'type'},
                           {'data': 'assigned'}],
                           'language': { 'url': "/assets/dataTables/Spanish.json"} 
                         })

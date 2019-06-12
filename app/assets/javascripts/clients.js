@@ -27,4 +27,5 @@ jQuery(document).ready(function($) {
     noty_alert('error', 'No se pudo eliminar al cliente')
   })
 
+
 })

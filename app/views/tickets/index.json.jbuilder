@@ -1,8 +1,8 @@
 json.data @open_tickets do |t|
   json.id t.id
   json.user t.user
-  json.date t.created_at.strftime("%d-%m-%Y")
-  json.type t.ticket_type.name
+  json.date t.created_at.strftime("%d-%m-%y")
+  json.type t.ticket_type.letter
   json.client t.client.name
   if t.assigned
     json.assigned t.assigned.name

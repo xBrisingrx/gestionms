@@ -1,19 +1,7 @@
-// jquery.min
-
-
-
 //= require jquery3
-//= require jquery-migrate.min
-//= require template/jquery-ui.min
-//= require template/popper.min
-//= require template/bootstrap.min
-//= require template/waves.min
-//= require template/jquery.slimscroll
-//= require template/modernizr
-//= require template/css-scrollbars
 
-//= require template/vertical-layout.min
-//= require template/pcoded.min
+
+
 
 //= require jquery-validate/jquery.validate.min
 //= require jquery-validate/additional-methods.min
