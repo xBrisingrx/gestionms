@@ -20,19 +20,38 @@ $('.select-person').select2({ width: '100%',theme: "bootstrap4" })
 // 	  }
 // 	})	
 // }
+function print_client_people()
+{
+  let user_person_id = $('#user_person_id_edit').val()
+  $.ajax({
+    url: '/clients/' + $("#form-user #user_client_id").val() + '/people',
+    type: 'GET',
+    dataType: 'JSON',
+    success: function ( resp ) {
+      // $('#form-user #user_person_id').find('option').remove().end().append('<option value="" disabled selected>Persona</option>');
+      $( resp.data ).each(function(i, element){
+        if ( user_person_id == element.id ) {
+          $("#form-user #user_person_id").append("<option value="+element.id +" selected >"+element.name + " " + element.surname + "</option>")
+        } else {
+          $("#form-user #user_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
+        }
+      })
+    }
+  })
+}
 
+print_client_people()
 
-
-  $("#form-user #client_id").on('change', function(event) {
-    $.ajax({
-      url: '/clients/' + $(this).val() + '/people',
-      type: 'GET',
-      dataType: 'JSON',
-      success: function ( resp ) {
-        $('#form-user #user_person_id').find('option').remove().end().append('<option value="" disabled selected>Solicito el servicio</option>');
-        $( resp.data ).each(function(i, element){
-          $("#form-user #ticket_person_id").append("<option value="+element.id +">"+element.name + " " + element.surname + "</option>")
-        })
-      }
-    })
-  }) // End on change
+$("#form-user").on("ajax:success", function(event) {
+  users_table.ajax.reload(null,false)
+  noty_alert('success', 'Edición exitosa')
+  $("#modal-user").modal('hide')
+}).on("ajax:error", function(event) {
+  $('#form-user #error_explanation').hide(500)
+  $('#form-user #error_list').empty()
+  var msj = jQuery.parseJSON( event.detail[2].response )
+  $.each( msj, function( key, value ) {
+    $('#form-user #error_list').append('<li> ' + key + ": " + value + ' </li>')
+  })
+  $('#form-user #error_explanation').show('slow')
+})
