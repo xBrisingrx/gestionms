@@ -1,4 +1,4 @@
-<%= form_with(model: @user, remote: true, class: '', id: 'form-user') do |form| %>
+<%= form_with(model: @user, id: 'form-user') do |form| %>
   <div id="error_explanation" class="alert alert-danger" style="display:none">
     <ul id="error_list"></ul>
   </div>
@@ -8,11 +8,22 @@
     <div class="col-sm-6">
       <select class="form-control select-person" id="user_rol_id" name="user[rol_id]" class="form-control">
         <option disabled selected>Seleccione tipo</option>
-        <option value="1">Administrador</option>
-        <option value="2">Cliente</option>
+        <% if !@user.nil? && @user.rol_id == 1 %>
+          <option value="1" selected>Administrador</option>
+        <% else %>
+          <option value="1">Administrador</option>
+        <% end %>
+        <% if !@user.nil? && @user.rol_id == 2 %>
+          <option value="2" selected>Cliente</option>
+        <% else %>
+          <option value="2">Cliente</option>
+        <% end %>
+        
       </select>
     </div>
   </div>
+
+
 
   <div class="form-group row">
     <%= form.label :username,'Nombre de usuario', class: 'col-sm-3 col-form-label' %>
@@ -48,8 +59,8 @@
       <select class="form-control select-person" id="user_client_id" name="user[client_id]" class="form-control">
         <option disabled selected>Seleccione cliente</option>
         <% @clients.each do |t|  %>
-          <% if t.id == @user.id %>
-            <option value="<%= t.id %>"><%= t.name %></option>
+          <% if !@user.person_id.nil? && t.id == @user.person.client_id %>
+            <option value="<%= t.id %>" selected><%= t.name %></option>
           <% else %>
             <option value="<%= t.id %>"><%= t.name %></option>  
           <% end %>
@@ -58,8 +69,12 @@
     </div>
   </div>
 
+  <% if !@user.person_id.nil? %>
+    <input type="hidden" id="user_person_id_edit" value="<%= @user.person_id %>">
+  <% end %>
+
   <div class="form-group row">
-    <label for="user_person_id" class="col-sm-3 col-form-label">Cliente</label>
+    <label for="user_person_id" class="col-sm-3 col-form-label">Persona</label>
     <div class="col-sm-6">
       <select class="form-control select-person" id="user_person_id" name="user[person_id]" class="form-control">
         <option disabled selected>Seleccione persona</option>
