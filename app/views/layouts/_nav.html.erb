@@ -46,18 +46,18 @@
   <div class="nav-list">
     <div class="pcoded-inner-navbar main-menu">
       <ul class="pcoded-item pcoded-left-item">
-        <li class="pcoded-hasmenu">
+        <li>
           <%= link_to '<span class="pcoded-micon"><i class="ti-headphone-alt"></i></span>
                       <span class="pcoded-mtext">Tickets</span>'.html_safe, 
                       tickets_path, class: "waves-effect waves-dark" %>
         </li>
         <% if current_user.rol.name == "Administrador" %>
-        <li class="pcoded-hasmenu">
+        <li>
           <%= link_to '<span class="pcoded-micon"><i class="ti-user"></i></span>
                       <span class="pcoded-mtext">Clientes</span>'.html_safe, 
                       clients_path, class: "waves-effect waves-dark" %>
         </li>
-        <li class="pcoded-hasmenu">
+        <li>
           <%= link_to '<span class="pcoded-micon"><i class="ti-user"></i></span>
                       <span class="pcoded-mtext">Usuarios</span>'.html_safe, 
                       users_path, class: "waves-effect waves-dark" %>
