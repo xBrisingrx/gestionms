@@ -4,7 +4,7 @@
       <div class="page-header-title">
         <i class="ti-headphone-alt bg-c-blue"></i>
         <div class="d-inline">
-          <h5>Tickets registrados</h5>
+          <h5>Registro de ticket</h5>
         </div>
       </div>
     </div>
@@ -39,14 +39,14 @@
               <input type="hidden"  id="ticket_assigned_to" name="ticket[assigned_to]" value="">
 
               <div class="form-group row">
-                <%= form.label :title, 'Asunto (*)', class: 'col-sm-1 col-form-label', required: true %>
+                <%= form.label :title, 'Asunto (*)', class: 'col-sm-2 col-form-label', required: true %>
                 <div class="col-sm-6">
                   <%= form.text_field :title, class:'form-control'%>
                 </div>
               </div>
 
               <div class="form-group row">
-                <%= form.label :detail, 'Motivo ', class: 'col-sm-1 col-form-label'  %><br>
+                <%= form.label :detail, 'Motivo ', class: 'col-sm-2 col-form-label'  %><br>
                 <div class="col-sm-9">
                   <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0', placeholder: 'Descripción'%>
                 </div>

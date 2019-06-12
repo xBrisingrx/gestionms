@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_033537) do
     t.string "location"
     t.string "province"
     t.bigint "phone"
+    t.string "comment", limit: 250, null: false
     t.boolean "active", default: true
     t.bigint "client_type_id"
     t.bigint "iva_condition_id"
