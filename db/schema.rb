@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_06_06_233211) do
+=======
+ActiveRecord::Schema.define(version: 2019_06_29_213210) do
+>>>>>>> a26d4f0c2d9fdd26dec24858346c5db3b839299f
 
-  create_table "client_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "client_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "comment"
     t.boolean "active", default: true
@@ -20,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "fantasy_name"
     t.bigint "cuit"
@@ -29,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.string "location"
     t.string "province"
     t.bigint "phone"
-    t.string "comment", limit: 250, null: false
+    t.string "comment", null: false
     t.boolean "active", default: true
     t.bigint "client_type_id"
     t.bigint "iva_condition_id"
@@ -41,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.index ["sale_condition_id"], name: "index_clients_on_sale_condition_id"
   end
 
-  create_table "fleet_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "fleet_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "comment"
     t.boolean "active", default: true
@@ -49,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "fleets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "fleets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "code"
     t.string "model", limit: 30
     t.string "ip_address"
@@ -67,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.index ["person_id"], name: "index_fleets_on_person_id"
   end
 
-  create_table "iva_conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "Porcentaje en la facturacion, responsables inscriptos se discrimina el 21% ", force: :cascade do |t|
+  create_table "iva_conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", comment: "Porcentaje en la facturacion, responsables inscriptos se discrimina el 21% ", force: :cascade do |t|
     t.string "condition", limit: 50
     t.integer "porcent"
     t.string "comment"
@@ -76,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "surname", limit: 50
     t.bigint "dni"
@@ -92,7 +96,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.index ["person_type_id"], name: "index_people_on_person_type_id"
   end
 
-  create_table "person_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "Discriminador de jerarquia en la empresa.", force: :cascade do |t|
+  create_table "person_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", comment: "Discriminador de jerarquia en la empresa.", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "comment"
     t.boolean "active", default: true
@@ -100,13 +104,13 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "rols", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "rols", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "sale_conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "Descuentos que se le puede llegar a hacer a un cliente.", force: :cascade do |t|
+  create_table "sale_conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", comment: "Descuentos que se le puede llegar a hacer a un cliente.", force: :cascade do |t|
     t.string "condition", limit: 50
     t.float "porcent"
     t.string "comment"
@@ -115,10 +119,10 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ticket_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "ticket_answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "ticket_id"
     t.bigint "user_id"
-    t.string "detail"
+    t.string "detail", limit: 500
     t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -126,7 +130,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.index ["user_id"], name: "index_ticket_answers_on_user_id"
   end
 
-  create_table "ticket_priorities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "ticket_priorities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "priority", limit: 50
     t.string "comment"
     t.boolean "active", default: true
@@ -134,7 +138,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ticket_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "ticket_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "status", limit: 50
     t.string "comment"
     t.boolean "active", default: true
@@ -142,7 +146,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ticket_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "ticket_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 50
     t.string "comment"
     t.boolean "active", default: true
@@ -151,9 +155,9 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.string "letter", limit: 5
   end
 
-  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title", limit: 100
-    t.string "detail"
+    t.string "detail", limit: 500
     t.date "created_date"
     t.bigint "assigned_to", comment: "Persona a cargo de realizar el ticket"
     t.boolean "report", default: false, comment: "Discrimina si el ticket va o no al reporte"
@@ -177,7 +181,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "username", limit: 50
     t.string "email", limit: 50
     t.string "password_digest"
@@ -186,6 +190,7 @@ ActiveRecord::Schema.define(version: 2019_06_06_233211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "rol_id"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["rol_id"], name: "index_users_on_rol_id"

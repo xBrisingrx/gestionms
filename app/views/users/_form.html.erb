@@ -83,8 +83,37 @@
     </div>
   </div>
 
+  <div class="form-group row text-center">
+    <label for="user_avatar" class="col-sm-3 col-form-label">Avatar</label>
+    <div class="col-md-12 col-lg-12 col-sm-12 mb-2">
+      <div class="form-radio">
+        <div class="radio radio-inline col-md-3 col-lg-3 col-sm-2 col-3">
+            <div class="row">
+              <img class="img-fluid img-radius" alt="Responsive image" src="/assets/avatars/avatar2.png">
+            </div>
+            <label>
+                <input type="radio" id="user_avatar" name="user[avatar]" value="avatar2.png">
+                <i class="helper"></i>
+            </label>
+        </div>
+        <div class="radio radio-inline col-md-3 col-lg-3 col-sm-2 col-3">
+          <div class="row">
+            <img class="img-fluid img-radius" alt="Responsive image" src="/assets/avatars/avatar_female.png">
+          </div>
+          <label>
+              <input type="radio" id="user_avatar" name="user[avatar]" value="avatar_female.png" required>
+              <i class="helper"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Agregar', class: 'btn btn-primary' %>
     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
   </div>
 <% end %>
+
+
+

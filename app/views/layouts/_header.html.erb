@@ -1,135 +1,62 @@
 <div class="loader-bg">
-<div class="loader-bar"></div>
+	<div class="loader-bar"></div>
 </div>
 
 <div id="pcoded" class="pcoded">
-<div class="pcoded-overlay-box"></div>
-<div class="pcoded-container navbar-wrapper">
+	<div class="pcoded-overlay-box"></div>
+	<div class="pcoded-container navbar-wrapper">
 
-<nav class="navbar header-navbar pcoded-header">
-<div class="navbar-wrapper">
-<div class="navbar-logo">
-<a href="index.html">
-<img class="img-fluid" src="/assets/logoMS.png" alt="Responsive image" />
-</a>
-<a class="mobile-menu" id="mobile-collapse" href="#!">
-<i class="feather icon-menu icon-toggle-right"></i>
-</a>
-<a class="mobile-options waves-effect waves-light">
-<i class="feather icon-more-horizontal"></i>
-</a>
-</div>
-<div class="navbar-container container-fluid">
-<ul class="nav-left">
-<li class="header-search">
-<div class="main-search morphsearch-search">
-<!-- <div class="input-group">
-<span class="input-group-prepend search-close">
-<i class="feather icon-x input-group-text"></i>
-</span>
-<input type="text" class="form-control" placeholder="Enter Keyword">
-<span class="input-group-append search-btn">
-<i class="ti-search input-group-text"></i>
-</span>
-</div> -->
-</div>
-</li>
+		<nav class="navbar header-navbar pcoded-header">
+			<div class="navbar-wrapper">
+				<div class="navbar-logo">
+					<%= link_to root_path do %>
+						<img class="img-fluid" src="/assets/logoMS.png" alt="logo" />
+					<% end %>
+					<a class="mobile-menu" id="mobile-collapse" href="#!">
+						<i class="ti-menu"></i>
+					</a>
+					<a class="mobile-options waves-effect waves-light">
+						<i class="ti-more"></i>
+					</a>
+				</div>
+				<div class="navbar-container container-fluid">
+					<ul class="nav-right">
 
-</ul>
+						<li class="user-profile header-notification">
+							<div class="dropdown-primary dropdown">
+								<div class="dropdown-toggle" data-toggle="dropdown">
+									<img src="/assets/avatars/<%= current_user.avatar %>" class="img-radius" alt="User-Profile-Image">
+									<span><%= current_user.person.name %></span>
+									<i class="ti-angle-down"></i>
+								</div>
+								<ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+									<li>
+										<%= link_to '<i class="ti-shift-right"></i> Salir'.html_safe, logout_path %>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-<ul class="nav-right">
-<!-- <li class="header-notification">
-<div class="dropdown-primary dropdown">
-<div class="dropdown-toggle" data-toggle="dropdown">
-<i class="ti-bell"></i>
-<span class="badge bg-c-red">5</span>
-</div>
-<ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-<li>
-<h6>Notifications</h6>
-<label class="label label-danger">New</label>
-</li>
-<li>
-<div class="media">
-<img class="img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
-<div class="media-body">
-<h5 class="notification-user">John Doe</h5>
-<p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-<span class="notification-time">30 minutes ago</span>
-</div>
-</div>
-</li>
-<li>
-<div class="media">
-<img class="img-radius" src="../files/assets/images/avatar-3.jpg" alt="Generic placeholder image">
-<div class="media-body">
-<h5 class="notification-user">Joseph William</h5>
-<p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-<span class="notification-time">30 minutes ago</span>
-</div>
-</div>
-</li>
-<li>
-<div class="media">
-<img class="img-radius" src="../files/assets/images/avatar-4.jpg" alt="Generic placeholder image">
-<div class="media-body">
-<h5 class="notification-user">Sara Soudein</h5>
-<p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-<span class="notification-time">30 minutes ago</span>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li> -->
-<!-- <li class="header-notification">
-<div class="dropdown-primary dropdown">
-<div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
-<i class="ti-comment"></i>
-<span class="badge bg-c-green">3</span>
-</div>
-</div>
-</li> -->
-<li class="user-profile header-notification">
-<div class="dropdown-primary dropdown">
-<div class="dropdown-toggle" data-toggle="dropdown">
-<img src="/assets/isologo.png" class="img-radius" alt="User-Profile-Image">
-<span><%= current_user.person.name %></span>
-</div>
-
-<!-- <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-<li>
-<a href="#!">
-<i class="feather icon-settings"></i> Settings
-</a>
-</li>
-<li>
-<a href="#">
-<i class="feather icon-user"></i> Profile
-</a>
-</li>
-<li>
-<a href="email-inbox.html">
-<i class="feather icon-mail"></i> My Messages
-</a>
-</li>
-<li>
-<a href="auth-lock-screen.html">
-<i class="feather icon-lock"></i> Lock Screen
-</a>
-</li>
-<li>
-<a href="auth-sign-in-social.html">
-<i class="feather icon-log-out"></i> Logout
-</a>
-</li>
-</ul> -->
-</div>
-</li>
-</ul>
-<div>
-	<%= link_to 'Salir <i class="fa fa-power-off"></i>'.html_safe, logout_path, class: 'btn btn-sm btn-danger text-white mt-2' %>
-</div>
-</div>
-</div>
-</nav>
+		<div class="pcoded-main-container">
+			<div class="pcoded-wrapper">
+				<nav class="pcoded-navbar">
+					<div class="pcoded-inner-navbar">
+						<ul class="pcoded-item">
+							<li class="">
+								<%= link_to '<i class="ti-headphone-alt"></i> Tickets'.html_safe, tickets_path, class: 'pcoded-mtext' %>
+							</li>
+							<% if current_user.rol.name == 'Administrador' %>
+							<li>
+								<%= link_to '<i class="ti-user"></i> Clientes'.html_safe, clients_path, class: 'pcoded-mtext' %>
+							</li>
+							<li>
+								<%= link_to '<i class="ti-lock"></i>Usuarios'.html_safe, users_path, class: 'pcoded-mtext' %>
+							</li>
+							<% end %>
+						</ul>  <!-- end menu -->
+					</div>
+				</nav>

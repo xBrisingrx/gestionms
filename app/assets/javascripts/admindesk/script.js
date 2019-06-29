@@ -188,10 +188,10 @@ $(document).ready(function() {
     $('.form-control').on('focus', function() {
         $(this).addClass("fill");
     });
-    $('#mobile-collapse i').addClass('icon-toggle-right');
+    $('#mobile-collapse i').addClass('ti-angle-down');
     $('#mobile-collapse').on('click', function() {
-        $('#mobile-collapse i').toggleClass('icon-toggle-right');
-        $('#mobile-collapse i').toggleClass('icon-toggle-left');
+        $('#mobile-collapse i').toggleClass('ti-angle-up');
+        $('#mobile-collapse i').toggleClass('ti-angle-down');
     });
 });
 $(document).ready(function() {

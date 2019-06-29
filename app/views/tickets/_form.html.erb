@@ -2,7 +2,7 @@
 
 
   <div class="form-group row">
-      <label for="ticket_ticket_type_id" class="col-sm-1 col-form-label">Tipo ticket</label>
+      <label for="ticket_ticket_type_id" class="col-sm-3 col-dm-2 col-lg-2 col-form-label">Tipo ticket</label>
       <div class="col-sm-6">
         <select class="form-control select-ticket" id="ticket_ticket_type_id" name="ticket[ticket_type_id]">
           <option value="1">Soporte técnico</option>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_assigned_to" class="col-sm-1 col-form-label">Encargado</label>
+      <label for="ticket_assigned_to" class="col-sm-3 col-dm-2 col-lg-2 col-form-label">Encargado</label>
       <div class="col-sm-6">
         <select class="form-control select-ticket" id="ticket_assigned_to" name="ticket[assigned_to]">
           <option value="" selected>Sin encargado</option>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_client_id" class="col-sm-1 col-form-label">Empresa</label>
+      <label for="ticket_client_id" class="col-sm-3 col-dm-2 col-lg-2 col-form-label">Empresa</label>
       <div class="col-sm-6">
         <select class="form-control select-ticket" id="ticket_client_id" name="ticket[client_id]">
           <option disabled="" selected>Seleccione empresa</option>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_fleet_id" class="col-sm-1 col-form-label">Equipo </label>
+      <label for="ticket_fleet_id" class="col-sm-3 col-dm-2 col-lg-2 col-form-label">Equipo </label>
       <div class="col-sm-6">
         <select class="form-control select-ticket" id="ticket_fleet_id" name="ticket[fleet_id]">
           <option disabled="" selected>Seleccione equipo</option>
@@ -46,7 +46,7 @@
   </div>
 
   <div class="form-group row">
-      <label for="ticket_person_id" class="col-sm-1 col-form-label">Quien pidio </label>
+      <label for="ticket_person_id" class="col-sm-3 col-dm-2 col-lg-2 col-form-label">Quien pidio </label>
       <div class="col-sm-6">
         <select class="form-control select-ticket" id="ticket_person_id" name="ticket[person_id]">
           <option disabled="" selected>Seleccione persona</option>
@@ -61,14 +61,14 @@
   </div>
 
   <div class="form-group row">
-    <%= form.label :title, 'Asunto (*)', class: 'col-sm-1 col-form-label'  %>
+    <%= form.label :title, 'Asunto (*)', class: 'col-sm-3 col-dm-2 col-lg-2 col-form-label'  %>
     <div class="col-sm-6">
       <%= form.text_field :title, class:'form-control'%>
     </div>
   </div>
 
   <div class="form-group row">
-    <%= form.label :detail, 'Motivo ', class: 'col-sm-1 col-form-label g-mb-5'  %><br>
+    <%= form.label :detail, 'Motivo ', class: 'col-sm-3 col-dm-2 col-lg-2 col-form-label g-mb-5'  %><br>
     <div class="col-sm-9">
       <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0', placeholder: 'Descripción'%>
     </div>

@@ -31,9 +31,10 @@ var form_edit_person = $('#form-edit-person').validate({
 })
 
 
-$("#form-person").on("ajax:success", function(event) {
+$("#form-edit-person").on("ajax:success", function(event) {
   people_table.ajax.reload(null,false)
   noty_alert('success', 'Edición exitosa')
+  $("#modal-person").modal('hide')
 }).on("ajax:error", function(event) {
 	$('#form-edit-person #error_explanation').hide(500)
   $('#form-edit-person #error_list').empty()

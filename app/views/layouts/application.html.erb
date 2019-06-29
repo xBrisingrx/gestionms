@@ -6,8 +6,8 @@
     <%= csp_meta_tag %>
 
     <%= favicon_link_tag 'favicon.ico' %>
-    <!-- <link href="/assets/rails.ico" rel="shortcut icon" type="image/x-icon" /> -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 
     <%= stylesheet_link_tag    'application' %>
     <%= javascript_include_tag 'application' %>
@@ -15,15 +15,18 @@
 
   <body>
     <% if logged_in? %>
-    <%= render 'layouts/header'%>
-    <%= render 'layouts/nav'%>
-    <div class="pcoded-content">
-      <%= yield %>
-    </div>
+      <%= render 'layouts/header'%>
+                <div class="pcoded-content">
+                  <%= yield %>
+                </div>
+              </div> <!-- pcoded-content -->
+            </div> <!-- pcoded-wrapper -->
+          </div> <!-- pcoded-main-container -->
+        </div> <!-- pcoded-container navbar-wrapper -->
+      </div> <!-- pcoded -->
     <% else %>
       <%= yield %>
     <% end %>
-  </main>
   </body>
 </html>
 
