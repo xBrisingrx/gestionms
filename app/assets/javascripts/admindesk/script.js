@@ -66,14 +66,7 @@ $(document).ready(function() {
             'width': '200px',
         });
     });
-    $(".search-close").on('click', function() {
-        $('.main-search .form-control').animate({
-            'width': '0',
-        });
-        setTimeout(function() {
-            $(".main-search").removeClass('open');
-        }, 300);
-    });
+
     // card js end
     $("#styleSelector .style-cont").slimScroll({
         setTop: "1px",
@@ -94,29 +87,9 @@ $(document).ready(function() {
         wheelStep: 5
     });
 
-    // search
-    $("#search-friends").on("keyup", function() {
-        var g = $(this).val().toLowerCase();
-        $(".userlist-box .media-body .chat-header").each(function() {
-            var s = $(this).text().toLowerCase();
-            $(this).closest('.userlist-box')[s.indexOf(g) !== -1 ? 'show' : 'hide']();
-        });
-    });
 
-    // open chat box
-    $('.displayChatbox').on('click', function() {
-        var my_val = $('.pcoded').attr('vertical-placement');
-        if (my_val == 'right') {
-            var options = {
-                direction: 'left'
-            };
-        } else {
-            var options = {
-                direction: 'right'
-            };
-        }
-        $('.showChat').toggle('slide', options, 500);
-    });
+
+
 
     //open friend chat
     $('.userlist-box').on('click', function() {
