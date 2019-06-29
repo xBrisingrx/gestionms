@@ -29,15 +29,18 @@
       <div class="page-body">
         <div class="card">
           <div class="card-block">
-            <button type="button" class="btn btn-primary btn-block show_answer ">
-              <i class="fas fa-pencil-alt"></i> Responder
-            </button>
-            <div class="row justify-content-center col-10" id="answer" style="display:none">
-              <%= form_with(model: [ @ticket_create, @ticket_create.ticket_answers.build ], local: true, :html => {:id => 'ticket-form', :class => 'g-brd-around g-brd-gray-light-v4 g-mb-20 w-100'} ) do |form| %>
+            <div class="row text-center">
+              <button type="button" class="btn btn-primary btn-block show_answer m-2">
+                <i class="fas fa-pencil-alt"></i> Responder
+              </button>
+            </div>
+            
+            <div class="row mb-3 mt-3" id="answer" style="display:none">
+              <%= form_with(model: [ @ticket_create, @ticket_create.ticket_answers.build ], local: true, :html => 
+                  {:id => 'ticket-form', :class => 'w-100'} ) do |form| %>
                 <div class="form-group">
-                  <%= form.label :detail, 'Mensaje ', class: 'col-sm-2 col-form-label g-mb-5 w-100'  %><br>
-                  <div class="col-sm-9">
-                    <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0'%>
+                  <div class="col-sm-12">
+                    <%= form.text_area :detail, class:'form-control form-control-md u-textarea-expandable rounded-0', placeholder: 'Respuesta...'%>
                   </div>
                 </div>
                 <%= form.submit 'Responder', class: 'btn btn-primary g-mb-5 ml-3' %>

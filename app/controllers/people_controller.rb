@@ -72,8 +72,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.update(person_params)
         @alert = { 'type' => 'success', 'msg' => 'Persona actualizada con éxito!' }
-        format.js
-        format.json { render json: 'success', status: :created, location: @person }
+        format.json { render json: { status: 'success' } , status: :created }
       else
         @alert = { 'type' => 'error', 'msg' => 'Ocurrio un error: no se pudieron actualizar los datos.' }
         format.html { render :edit }

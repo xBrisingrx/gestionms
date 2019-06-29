@@ -8,12 +8,12 @@ class UserMailer < ApplicationMailer
 
     if params[:email].nil?
           mail(to: "soporte@maurosampaoli.com.ar",
-               subject: @ticket.title) do |format|
+               subject: "[Ticket Nº " + @ticket.id.to_s + "] " + @tickt.title) do |format|
                format.html
       end
     else
       mail(to: "soporte@maurosampaoli.com.ar," + params[:email]*",",
-           subject: @ticket.title) do |format|
+           subject: "[Ticket Nº " + @ticket.id.to_s + "] " + @tickt.title) do |format|
            format.html
       end
     end
@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
   def ticket_soporte_tecnico
     @ticket = params[:ticket]
     mail(to: "soporte@maurosampaoli.com.ar",
-    		 subject: @ticket.title) do |format|
+    		 subject: "[Ticket Nº " + @ticket.id.to_s + "] " + @tickt.title) do |format|
     		 format.html
     end
   end
@@ -33,14 +33,14 @@ class UserMailer < ApplicationMailer
 
     if params[:email].nil?
       mail(to: "soporte@maurosampaoli.com.ar",
-           subject: "Respuesta al ticket Nº " + @ticket.id.to_s) do |format|
+           subject: "[Respuesta ticket Nº " + @ticket.id.to_s + "] " + @tickt.title) do |format|
            format.html
       end
 
     else
 
       mail(to: "soporte@maurosampaoli.com.ar," + params[:email]*",",
-           subject: "Respuesta al ticket Nº " + @ticket.id.to_s) do |format|
+           subject: "[Respuesta ticket Nº " + @ticket.id.to_s + "] " + @tickt.title) do |format|
            format.html
       end
     end
