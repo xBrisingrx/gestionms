@@ -94,7 +94,7 @@ class ClientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_client
       @client = Client.find(params[:id])
     end
@@ -105,7 +105,6 @@ class ClientsController < ApplicationController
       @iva_conditions = IvaCondition.where(active: true).order(condition: :asc)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
       params.require(:client).permit(:name, :cuit, :email, :direction, :location,
                                      :province, :phone, :client_type_id,:sale_condition_id,:iva_condition_id, :active)
