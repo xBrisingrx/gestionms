@@ -1,4 +1,4 @@
-//= require jquery3
+// jquery3
 
 
 
