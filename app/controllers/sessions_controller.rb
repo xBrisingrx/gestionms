@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     if logged_in?
       redirect_to root_path
     else
+      @title = 'Iniciar sesion'
       respond_to do |format|
         format.html
       end
