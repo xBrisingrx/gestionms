@@ -6,11 +6,11 @@ json.data @open_tickets do |t|
   json.client t.client.name
   json.actions ''+
     if t.ticket_status.status != 'Finalizado'
-               "<a href='tickets/#{t.id}' class='btn btn-sm btn-info'> <i class='fa fa-comment'></i></a> " +
-               "<button class='btn btn-sm btn-success close_ticket_btn'"+
+               "<a href='tickets/#{t.id}' class='btn btn-mini btn-info'> <i class='fa fa-comment'></i></a> " +
+               "<button class='btn btn-mini btn-success close_ticket_btn'"+
                "onclick='modal_close_ticket(#{t.id})'> <i class='fa fa-check'></i></button> "
     else
-               "<a href='tickets/#{t.id}' class='btn btn-sm btn-primary'> Cerrado </a>"
+               "<a href='tickets/#{t.id}' class='btn btn-mini btn-primary'> Cerrado </a>"
     end
   json.title t.title
 end
