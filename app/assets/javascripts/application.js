@@ -1,7 +1,13 @@
 //= require jquery3
+//= require admindesk/jquery-ui.min
+//= require admindesk/popper.min
+//= require admindesk/bootstrap.min
+//= require admindesk/waves.min
+//= require admindesk/jquery.slimscroll
 
-
-
+//= require admindesk/pcoded.min
+//= require admindesk/horizontal-layout.min
+//= require admindesk/script
 
 //= require jquery-validate/jquery.validate.min
 //= require jquery-validate/additional-methods.min
@@ -9,7 +15,17 @@
 
 //= require rails-ujs
 //= require activestorage
-//= require_tree .
+
+//= require clients
+//= require fleets
+//= require noty.min
+//= require people
+//= require tickets
+//= require users
+
+
+
+// require_tree .
 
 function noty_alert( type, msg, time)
 {
