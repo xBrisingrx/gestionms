@@ -1,31 +1,38 @@
 //= require jquery3
-// admindesk/jquery-ui.min
-// admindesk/popper.min
-// admindesk/bootstrap.min
-// admindesk/waves.min
-// admindesk/jquery.slimscroll
+//= require admindesk/jquery-ui.min
+//= require admindesk/popper.min
+//= require admindesk/bootstrap.min
+//= require admindesk/waves.min
+//= require admindesk/jquery.slimscroll
 
-// admindesk/pcoded.min
-// admindesk/horizontal-layout.min
-// admindesk/script
+//= require admindesk/pcoded.min
+//= require admindesk/horizontal-layout.min
+//= require admindesk/select2.full.min
+//= require admindesk/select2-custom
+//= require admindesk/script
+
+//= require dataTables/datatables.min
 
 //= require jquery-validate/jquery.validate.min
 //= require jquery-validate/additional-methods.min
 //= require jquery-validate/messages_es_AR.min
 
+
+
+
 //= require rails-ujs
 //= require activestorage
 
-// clients
-// fleets
-// noty.min
-// people
-// tickets
-// users
+//= require clients
+//= require fleets
+//= require noty.min
+//= require people
+//= require tickets
+//= require users
 
 
 
-//= require_tree .
+// require_tree .
 
 function noty_alert( type, msg, time)
 {
