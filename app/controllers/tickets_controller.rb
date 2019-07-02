@@ -132,18 +132,17 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save!
-        # @ticket.images.attach(params[:images])
         if params[:ticket_type_id] == 1
           if @ticket.report
-            # UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+            UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
           else
-            # UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+            UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
           end
         else 
           if @ticket.report
-            # UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name, email: @email).ticket_varios.deliver_later!
+            UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name, email: @email).ticket_varios.deliver_later!
           else
-            # UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
+            UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
           end
         end
 
