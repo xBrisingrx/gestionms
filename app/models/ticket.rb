@@ -7,4 +7,5 @@ class Ticket < ApplicationRecord
   belongs_to :user
   belongs_to :assigned, :class_name => 'Person', :foreign_key => 'assigned_to', optional: true
   has_many :ticket_answers
+  has_many_attached :images
 end

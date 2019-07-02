@@ -28,7 +28,7 @@ gem 'listen', '>= 3.0.5', '< 3.2'
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

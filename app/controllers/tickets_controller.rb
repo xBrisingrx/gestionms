@@ -132,17 +132,18 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save!
+        # @ticket.images.attach(params[:images])
         if params[:ticket_type_id] == 1
           if @ticket.report
-            UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+            # UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
           else
-            UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
+            # UserMailer.with(ticket: @ticket).ticket_soporte_tecnico.deliver_later!
           end
         else 
           if @ticket.report
-            UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name, email: @email).ticket_varios.deliver_later!
+            # UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name, email: @email).ticket_varios.deliver_later!
           else
-            UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
+            # UserMailer.with(ticket: @ticket, user_email: current_user.email, rol: current_user.rol.name).ticket_varios.deliver_later!
           end
         end
 
@@ -238,6 +239,6 @@ class TicketsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
       params.require(:ticket).permit(:client_id, :fleet_id, :user_id, :person_id, :assigned_to, :detail,
-                                     :ticket_status_id, :ticket_type_id, :ticket_priority_id, :title, :report, :active)
+                                     :ticket_status_id, :ticket_type_id, :ticket_priority_id, :title, :report, :active, images: [] )
     end
 end

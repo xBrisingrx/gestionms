@@ -45,7 +45,7 @@ class TicketAnswersController < ApplicationController
     respond_to do |format|
       if @answer.save
         @ticket = Ticket.find(@answer.ticket_id)
-        UserMailer.with(ticket: @ticket, answer: @answer, email: @email).ticket_answer.deliver_later!
+        # UserMailer.with(ticket: @ticket, answer: @answer, email: @email).ticket_answer.deliver_later!
         format.html { redirect_to tickets_path, notice: 'Answer was successfully created.' }
         # format.json { render json: {status: true}, status: :created, location: @answer }
       else
@@ -88,6 +88,6 @@ class TicketAnswersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
       # params.fetch(:answer, {})
-      params.require(:ticket_answer).permit(:detail)
+      params.require(:ticket_answer).permit(:detail, images: [])
     end
 end
