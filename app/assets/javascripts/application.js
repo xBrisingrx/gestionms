@@ -29,6 +29,7 @@
 //= require people
 //= require tickets
 //= require users
+//= require reports
 
 
 

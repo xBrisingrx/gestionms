@@ -34,6 +34,11 @@ gem 'mini_magick', '~> 4.8'
 # gem 'capistrano-rails', group: :development
 gem 'mysql2', '~> 0.5.2'
 
+# Export excel
+# gem 'rubyzip', '~> 1.2', '>= 1.2.3'
+gem 'axlsx', '~> 2.0', '>= 2.0.1'
+gem 'axlsx_rails', '~> 0.5.2'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

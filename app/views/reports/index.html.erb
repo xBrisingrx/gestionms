@@ -1,0 +1,98 @@
+<div class="page-header card">
+  <div class="row align-items-end">
+    <div class="col-lg-8">
+      <div class="page-header-title">
+        <i class="ti-user bg-c-blue"></i>
+        <div class="d-inline">
+          <h5>Reportes</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="page-header-breadcrumb">
+        <ul class=" breadcrumb breadcrumb-title">
+          <li class="breadcrumb-item">
+            <%= link_to '<i class="ti-home"></i>'.html_safe, root_path %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to 'Reportes', reports_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pcoded-inner-content">
+  <div class="main-body">
+    <div class="page-wrapper">
+      <div class="page-body">
+      	<div class="row">
+      		<div class="col-sm-12">
+      			<div class="card">
+      				<div class="card-block">
+      					<div class="row">
+					      	<div class="col-sm-12 col-md-6">
+						        <div class="card text-white card-info">
+						          <div class="card-header">
+						            <h4>Reportes por fecha</h4>
+						            <span>Tickets registrados</span>
+						          </div>
+						          <div class="card-block">
+						            <%= form_with(  class: '', id: 'form-report-between-dates', method: 'GET', local: true) do |form| %>
+													<div class="form-row">
+												    <div class="col">
+												    	<%= form.label 'Desde:', class: 'col-form-label' %>
+												    	<%= form.date_field :start_date, class: 'form-control' %>
+												    </div>
+
+												    <div class="col">
+												    	<%= form.label 'Hasta', class: 'col-form-label' %>
+											      	<%= form.date_field :end_date, class: 'form-control' %>
+												    </div>
+												  </div>
+												  <div class="actions">
+												    <button type="button" class="btn btn-inverse report_between_dates mt-2">Generar</button>
+												  </div>
+						            <% end %>
+						          </div>
+						        </div>
+					      	</div>
+					      	<div class="col-sm-12 col-md-6">
+						        <div class="card text-white card-primary">
+						          <div class="card-header">
+						            <h4>Otro reporte</h4>
+						            <span>Tickets finalizados/no contestados..</span>
+						          </div>
+						          <div class="card-block">
+						            <%= form_with(  class: '', id: 'form-report-between-dates', method: 'GET', local: true) do |form| %>
+													<div class="form-group">
+												    <%= form.label 'Fecha inicio', class: 'col-sm-3 col-lg-1 col-form-label' %>
+												    <div class="col-4">
+												      <%= form.date_field :start_date, class: 'form-control rounded-0' %>
+												    </div>
+												  </div>
+												  <div class="actions">
+												    <button type="button" class="btn btn-inverse report_between_dates" disabled="">Generar</button>
+												  </div>
+						            <% end %>
+						          </div>
+						        </div>
+					      	</div>
+      					</div>
+      				</div>
+      			</div>				
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    
+
+
+

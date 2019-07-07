@@ -32,7 +32,7 @@
           <div class="card-header">
             <%= link_to 'Nuevo cliente', new_client_path, {:remote => true, 'data-toggle' =>  "modal",
                                                            'data-target' => '#modal-client', 'class' => 'btn btn-primary'} %>
-            <%= link_to 'Download as Excel', clients_path(format: :xlsx), :class => 'btn btn-info' %>
+            <%= link_to 'Exportar a excel', clients_path(format: :xlsx), :class => 'btn btn-info' %>
           </div>
           <div class="card-block">
             <div class="table-responsive dt-responsive">

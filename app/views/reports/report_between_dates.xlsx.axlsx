@@ -8,21 +8,22 @@ wb.styles do |style|
   # A style that overrides top and left border style
 	override_border = wb.styles.add_style :border => { :style => :thin, :color => "000000" }
 	border_bg_grey = style.add_style :bg_color => 'C0C0C0', :border => { :style => :thin, :color => "000000" }
-  wb.add_worksheet(name: "Clients") do |sheet|
+  wb.add_worksheet(name: "tickets") do |sheet|
     # Add a title row
-    # sheet.add_row ["Inventory Items"], style: project_heading
+    sheet.add_row ["Tickets registrados desde #{@start_date} hasta #{@end_date}"], style: project_heading
+    sheet.merge_cells 'A1:D1'
     # Add the date this was downloaded
     # sheet.add_row ["Downloaded at", Time.now.strftime("%b %-d, %Y")]
     # Add a blank row
-    # sheet.add_row []
+    sheet.add_row []
     # Create the header row
-    sheet.add_row ["Nombre", "Email"], style: header
+    sheet.add_row ["Fecha","Cliente", "Asunto", "Estado"], style: header
     # Create entries for each item
-    @clients.each_with_index do |client, i|
+    @tickets.each_with_index do |t, i|
     	if ( i % 2 == 0 )
-    		sheet.add_row [client.name, client.email], style: border_bg_grey
+    		sheet.add_row [t.created_at.strftime("%d-%m-%Y"), t.client.name, t.title, t.ticket_status.status], style: border_bg_grey
     	else
-    		sheet.add_row [client.name, client.email], style: override_border
+    		sheet.add_row [t.created_at.strftime("%d-%m-%Y"), t.client.name, t.title, t.ticket_status.status], style: override_border
     	end
 	  end
   end

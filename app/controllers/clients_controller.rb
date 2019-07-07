@@ -12,10 +12,10 @@ class ClientsController < ApplicationController
     @clients = Client.where(active: true).order(name: :asc)
 
     respond_to do |format|
-      # format.xlsx {
-      # response.headers[
-      #   'Content-Disposition'
-      # ] = "attachment; filename='clientes.xlsx'" }
+      format.xlsx {
+      response.headers[
+        'Content-Disposition'
+      ] = "attachment; filename='clientes.xlsx'" }
       format.html
       format.json
     end

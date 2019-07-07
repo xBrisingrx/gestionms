@@ -30,4 +30,8 @@ Rails.application.routes.draw do
   post 'assign_person', to: 'tickets#assign_person', as: 'assign_person'
   post 'close_ticket', to: 'tickets#close_ticket', as: 'close_ticket'
 
+  # Reports
+  resources :reports, only: [:index]
+  get 'report_between_dates/:start_date/:end_date', to: 'reports#report_between_dates', as: 'report_between_dates', defaults: { format: 'xlsx' }
+
 end
