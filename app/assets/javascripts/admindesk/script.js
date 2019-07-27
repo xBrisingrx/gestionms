@@ -68,24 +68,24 @@ $(document).ready(function() {
     });
 
     // card js end
-    $("#styleSelector .style-cont").slimScroll({
-        setTop: "1px",
-        height: "calc(100vh - 480px)",
-    });
+    // $("#styleSelector .style-cont").slimScroll({
+    //     setTop: "1px",
+    //     height: "calc(100vh - 480px)",
+    // });
     /*chatbar js start*/
     /*chat box scroll*/
-    var a = $(window).height() - 80;
-    $(".main-friend-list").slimScroll({
-        height: a,
-        allowPageScroll: false,
-        wheelStep: 5
-    });
-    var a = $(window).height() - 155;
-    $(".main-friend-chat").slimScroll({
-        height: a,
-        allowPageScroll: false,
-        wheelStep: 5
-    });
+    // var a = $(window).height() - 80;
+    // $(".main-friend-list").slimScroll({
+    //     height: a,
+    //     allowPageScroll: false,
+    //     wheelStep: 5
+    // });
+    // var a = $(window).height() - 155;
+    // $(".main-friend-chat").slimScroll({
+    //     height: a,
+    //     allowPageScroll: false,
+    //     wheelStep: 5
+    // });
 
 
 

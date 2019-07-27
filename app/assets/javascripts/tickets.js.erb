@@ -12,9 +12,7 @@ var form_new_ticket_varios = $('#form-ticket-varios')
 
 $('.close_ticket_btn').on('click', function(event) {
   // Le asignamos el id del ticket al modal
-  console.log('click')
   $('#form-close-ticket #ticket_id').val( $(this).data('id') )
-  console.log('id: ' + $(this).data('id'))
 })
 
 function modal_close_ticket(id)

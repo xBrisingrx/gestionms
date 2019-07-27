@@ -1,13 +1,15 @@
 //= require jquery3
-//= require admindesk/jquery-ui.min
+// admindesk/jquery-ui.min
 //= require admindesk/popper.min
 //= require admindesk/bootstrap.min
 //= require admindesk/waves.min
-//= require admindesk/jquery.slimscroll
+// admindesk/jquery.slimscroll
 
 //= require admindesk/pcoded.min
 //= require admindesk/horizontal-layout.min
 //= require admindesk/select2.full.min
+// admindesk/bootstrap-multiselect
+// admindesk/jquery.multi-select
 //= require admindesk/select2-custom
 //= require admindesk/script
 
@@ -30,10 +32,6 @@
 //= require tickets
 //= require users
 //= require reports
-
-
-
-// require_tree .
 
 function noty_alert( type, msg, time)
 {
