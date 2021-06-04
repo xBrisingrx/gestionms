@@ -83,7 +83,6 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
     @people = Person.where(client_id: 20 , active: true )
-    # @users = User.all
     @clients = Client.all
     respond_to do |format|
       if current_user.rol.name == 'Administrador'

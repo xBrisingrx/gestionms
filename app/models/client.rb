@@ -8,6 +8,5 @@ class Client < ApplicationRecord
   has_many :computers
   has_many :tickets
 
-	validates :name, presence: true,
-						length: { minimum: 3 }
+	validates :name, presence: true, length: { minimum: 3 }, uniqueness: true
 end

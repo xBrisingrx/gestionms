@@ -41,13 +41,17 @@
     </style>
   </head>
   <body>
-    <h2>Ticket registrado con exito</h2>
+    <h2>Ticket registrado por <%= @ticket.user.person.name %></h2>
 
     <table class="blueTable">
       <tbody>
         <tr>
           <th style="width:10%">Ticket #</th>
           <td style="width:90%"><%= @ticket.id  %></td>
+        </tr>
+        <tr>
+          <th style="width:10%">Encargado</th>
+          <td style="width:90%"><%= @ticket.assigned ? @ticket.assigned.name : 'Sin encargado'  %></td>
         </tr>
         <tr>
           <th style="width:10%">Asunto</th>

@@ -32,7 +32,9 @@ module Gestionms
 
     # Add fonts directory in assets
     # config.assets.paths << Rails.root.join("app", "assets", "fonts")
-
+    # config de locales
+    config.i18n.available_locales = [:en, :es_AR]
+    config.i18n.default_locale = :es_AR
     # Configuracion para usar variables de entorno
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')

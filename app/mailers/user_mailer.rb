@@ -7,12 +7,12 @@ class UserMailer < ApplicationMailer
     @rol = params[:rol]
 
     if params[:email].nil?
-          mail(to: "soporte@maurosampaoli.com.ar",
+          mail(to: "sistemas@maurosampaoli.com.ar",
                subject: "[Ticket Nº " + @ticket.id.to_s + "] " + @ticket.title) do |format|
                format.html
       end
     else
-      mail(to: "soporte@maurosampaoli.com.ar," + params[:email]*",",
+      mail(to: "sistemas@maurosampaoli.com.ar," + params[:email]*",",
            subject: "[Ticket Nº " + @ticket.id.to_s + "] " + @ticket.title) do |format|
            format.html
       end

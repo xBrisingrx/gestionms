@@ -1,8 +1,4 @@
 <%= form_with(model: @client, remote: true, :html => {:id => 'client-form'}) do |form| %>
-  <div id="error_explanation" class="alert alert-danger" style="display:none">
-    <ul id="error_list"></ul>
-  </div>
-    
   <div class="form-group row">
     <label for="client_type_client_id" class="col-sm-3 col-form-label">Tipo cliente</label>
     <div class="col-sm-6">
@@ -24,16 +20,19 @@
     <div class="col-9">
       <%= form.text_field :name, class: 'form-control rounded-0' %>
     </div>
+    <div class="invalid-feedback client_name"></div>
   </div>
 
   <div class="form-group">
     <%= form.label 'CUIT', class: 'col-sm-3 col-form-label' %>
     <%= form.number_field :cuit %>
+    <div class="invalid-feedback client_cuit"></div>
   </div>
 
   <div class="form-group">
     <%= form.label 'Email', class: 'col-sm-3 col-form-label' %>
     <%= form.email_field :email  %>
+    <div class="invalid-feedback client_email"></div>
   </div>
 
   <div class="form-group row">
@@ -72,12 +71,14 @@
     <%= form.label 'Dirección', class: 'col-3 col-form-label' %>
     <div class="col-9">
       <%= form.text_field :direction, class: 'form-control rounded-0' %>
+      <div class="invalid-feedback client_direction"></div>
     </div>
   </div>
   <div class="form-group row">
     <%= form.label 'Localidad', class: 'col-3 col-form-label' %>
     <div class="col-9">
       <%= form.text_field :location, class: 'form-control rounded-0' %>
+      <div class="invalid-feedback client_location"></div>
     </div>
   </div>
 
@@ -85,6 +86,7 @@
     <%= form.label 'Provincia', class: 'col-3 col-form-label' %>
     <div class="col-9">
       <%= form.text_field :province, class: 'form-control rounded-0' %>
+      <div class="invalid-feedback client_province"></div>
     </div>
   </div>
 
@@ -92,6 +94,7 @@
     <%= form.label 'Teléfono', class: 'col-3 col-form-label' %>
     <div class="col-9">
       <%= form.text_field :phone, class: 'form-control rounded-0' %>
+      <div class="invalid-feedback client_phone"></div>
     </div>
   </div>
 

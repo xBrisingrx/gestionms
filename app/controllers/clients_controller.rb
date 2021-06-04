@@ -45,16 +45,11 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-    @client.comment = "No hay comentario"
     respond_to do |format|
       if @client.save
-        format.js
         format.json { render json: { status: 'success' } , status: :created }
-      else
-        # format.html { render :new } 
+      else 
         format.json { render json: @client.errors, status: :unprocessable_entity }
-
-        # format.js 
       end
     end
   end
